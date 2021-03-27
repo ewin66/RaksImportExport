@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Receptury.Module.Win", "Rec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Receptury.Win", "Receptury.Win\Receptury.Win.csproj", "{A7FCF920-3085-47DF-8962-126D68CEFF5B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaksRecepturyImport", "RaksRecepturyImport\RaksRecepturyImport.csproj", "{3B93CF41-E628-41D2-ABC3-E1887C8CF6C6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,12 +34,6 @@ Global
 		{A7FCF920-3085-47DF-8962-126D68CEFF5B}.EasyTest|Any CPU.Build.0 = EasyTest|Any CPU
 		{A7FCF920-3085-47DF-8962-126D68CEFF5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7FCF920-3085-47DF-8962-126D68CEFF5B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3B93CF41-E628-41D2-ABC3-E1887C8CF6C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B93CF41-E628-41D2-ABC3-E1887C8CF6C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3B93CF41-E628-41D2-ABC3-E1887C8CF6C6}.EasyTest|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B93CF41-E628-41D2-ABC3-E1887C8CF6C6}.EasyTest|Any CPU.Build.0 = Debug|Any CPU
-		{3B93CF41-E628-41D2-ABC3-E1887C8CF6C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3B93CF41-E628-41D2-ABC3-E1887C8CF6C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
