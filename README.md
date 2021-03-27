@@ -1,12 +1,12 @@
 # RaksImportExport
-RaksTo taki Durny program ksiegowy do którego niektórzy dziwni ksiegowi chca importy i eksporty
-W dodatku plik importu nie jest zgodny ze standardem XML i standardowe metody jego obróbki w c# zawodzą. 
+Raks to taki irytujący program ksiegowy/magazynowo/jakiś tam, do którego niektórzy dziwni ksiegowi chca importy i eksporty. 
+
 Dokuemntacji brak
 Kontaktu z Raksem brak
 Coś trzeba wymodzić
 
-
-dzile sie tym co mam, jak ktoś moze cos dolozyc od siebie to bede wdzieczny
+W dodatku plik importu nie jest zgodny ze standardem XML i standardowe metody jego obróbki w c# zawodzą. 
+dzilę sie tym co mam, jak ktoś moze cos dolozyc od siebie to bede wdzieczny.
 
 
 
