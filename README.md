@@ -11,4 +11,5 @@ dzilę sie tym co mam, jak ktoś moze cos dolozyc od siebie to bede wdzieczny.
 
 
 przy okazji tworzona jest aplikacja windowsowa wyswietlajaca te dziwne dane za pomoca DevExpress XAF. 
+Można ja używac przez 30 dni testowo. A potem znów testowo, a kiedys w koncu kupic bo to moim zdaniem najlepszy framework do aplikacji windowsowych (a niedługo także blazor-owych)
 Wiecej tutaj: https://docs.devexpress.com/eXpressAppFramework/112670/expressapp-framework
