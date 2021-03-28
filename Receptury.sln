@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Receptury.Win", "Receptury.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaksClassGenerator", "RaksClassGenerator\RaksClassGenerator.csproj", "{54AA976B-FF7A-4C65-9F24-F31A2DEFCC82}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEksportFaktury", "TestEksportFaktury\TestEksportFaktury.csproj", "{4931B038-4159-4479-8B93-D5D8144C81EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,12 @@ Global
 		{54AA976B-FF7A-4C65-9F24-F31A2DEFCC82}.EasyTest|Any CPU.Build.0 = Debug|Any CPU
 		{54AA976B-FF7A-4C65-9F24-F31A2DEFCC82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54AA976B-FF7A-4C65-9F24-F31A2DEFCC82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4931B038-4159-4479-8B93-D5D8144C81EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4931B038-4159-4479-8B93-D5D8144C81EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4931B038-4159-4479-8B93-D5D8144C81EC}.EasyTest|Any CPU.ActiveCfg = Debug|Any CPU
+		{4931B038-4159-4479-8B93-D5D8144C81EC}.EasyTest|Any CPU.Build.0 = Debug|Any CPU
+		{4931B038-4159-4479-8B93-D5D8144C81EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4931B038-4159-4479-8B93-D5D8144C81EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
