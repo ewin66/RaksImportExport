@@ -1,5 +1,5 @@
-﻿namespace Receptury.Module.Win {
-    partial class RecepturyWindowsFormsModule {
+﻿namespace JK.XAF.Module.Win {
+    partial class JKXafWinModule {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -24,13 +24,10 @@
         /// </summary>
         private void InitializeComponent() {
             // 
-            // RecepturyWindowsFormsModule
+            // XAFWindowsFormsModule
             // 
-            this.RequiredModuleTypes.Add(typeof(Receptury.Module.RecepturyModule));
             this.RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.Win.SystemModule.SystemWindowsFormsModule));
-            this.RequiredModuleTypes.Add(typeof(JK.XAF.Module.JKXafModule));
-            this.RequiredModuleTypes.Add(typeof(JK.XAF.Module.Win.JKXafWinModule));
-
+			this.RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.Validation.Win.ValidationWindowsFormsModule));
         }
 
         #endregion

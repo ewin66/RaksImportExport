@@ -130,6 +130,9 @@
       <DependentUpon>ViewController1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
+    <EmbeddedResource Include="Module.resx">
+      <DependentUpon>Module.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +150,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Welcome.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonLibs\CommonLibs.csproj">
+      <Project>{095ce671-08a1-4141-ba50-cf55593c27f2}</Project>
+      <Name>CommonLibs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JK.XAF.Module\JK.XAF.Module.csproj">
+      <Project>{bd273264-8c74-4fb9-b3c5-95d5dbe51c91}</Project>
+      <Name>JK.XAF.Module</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

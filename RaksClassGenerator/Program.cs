@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Linq;
 using System.Globalization;
-using kashiash.utils;
+using CommonLibs;
 
 namespace RaksClassGenerator
 {

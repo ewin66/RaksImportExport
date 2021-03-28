@@ -133,6 +133,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="WinModule.resx">
+      <DependentUpon>WinModule.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\ExpressAppLogo.png" />
@@ -150,6 +154,18 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonLibs\CommonLibs.csproj">
+      <Project>{095ce671-08a1-4141-ba50-cf55593c27f2}</Project>
+      <Name>CommonLibs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JK.XAF.Module.Win\JK.XAF.Module.Win.csproj">
+      <Project>{d9245755-568f-463e-92f4-2de6c5a1771c}</Project>
+      <Name>JK.XAF.Module.Win</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JK.XAF.Module\JK.XAF.Module.csproj">
+      <Project>{bd273264-8c74-4fb9-b3c5-95d5dbe51c91}</Project>
+      <Name>JK.XAF.Module</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Receptury.Module\Receptury.Module.csproj">
       <Project>{B812B8C5-CD0A-4AD2-A2CA-0E687E510C2C}</Project>
       <Name>Receptury.Module</Name>

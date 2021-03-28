@@ -1,5 +1,5 @@
-﻿namespace Receptury.Module {
-	partial class RecepturyModule {
+﻿namespace JK.XAF.Module {
+	partial class JKXafModule {
 		/// <summary> 
 		/// Required designer variable.
 		/// </summary>
@@ -23,13 +23,10 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-            // 
-            // RecepturyModule
-            // 
-            this.RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.SystemModule.SystemModule));
-            this.RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.Objects.BusinessClassLibraryCustomizationModule));
-            this.RequiredModuleTypes.Add(typeof(JK.XAF.Module.JKXafModule));
-
+			// 
+			// ModuleModule
+			// 
+			this.RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.SystemModule.SystemModule));
 		}
 
 		#endregion
