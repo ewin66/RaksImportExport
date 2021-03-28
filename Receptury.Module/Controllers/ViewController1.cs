@@ -72,13 +72,13 @@ namespace Receptury.Module.Controllers
 
                 if (artykul.Vat == null)
                 {
-                    var rec = ObjectSpace.FindObject<StawkaVat>(new BinaryOperator(nameof(StawkaVat.Id), artykul.IdStawki));
+                    var rec = ObjectSpace.FindObject<RaksStawkaVat>(new BinaryOperator(nameof(RaksStawkaVat.Id), artykul.IdStawki));
                     if (rec == null)
                     {
-                        rec = ObjectSpace.CreateObject<StawkaVat>();
+                        rec = ObjectSpace.CreateObject<RaksStawkaVat>();
                         rec.Id = artykul.IdStawki;
-                        rec.Wartosc = artykul.StawkaVat;
-                        rec.TypStawki = artykul.TypStawki;
+                        rec.WartoscProcentowa = artykul.StawkaVat;
+                        rec.TypStawkiVat = artykul.TypStawki;
                     }
                     artykul.Vat = rec;
                 }
@@ -97,19 +97,6 @@ namespace Receptury.Module.Controllers
             ObjectSpace.CommitChanges();
         }
 
-        private RaksKontrahent DodajKontarhenta(int id,string nazwa, string nip)
-        {
-            var rec = ObjectSpace.FindObject<RaksKontrahent>(new BinaryOperator(nameof(RaksKontrahent.Id), id));
-            if (rec == null)
-            {
-                rec = ObjectSpace.CreateObject<RaksKontrahent>();
-                rec.Id = id;
-                rec.Nazwa = nazwa;
-                rec.Nip = nip;
-            }
-
-            return rec;
-        }
 
         private void simpleAction3_Execute(object sender, SimpleActionExecuteEventArgs e)
         {

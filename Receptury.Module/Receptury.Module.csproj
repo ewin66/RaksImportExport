@@ -94,8 +94,8 @@
     <Compile Include="BusinessObjects\RaksArtykul.cs" />
     <Compile Include="BusinessObjects\RaksGrupaArtykulow.cs" />
     <Compile Include="BusinessObjects\RaksKontakt.cs" />
-    <Compile Include="BusinessObjects\RaksKontrahent.cs" />
     <Compile Include="BusinessObjects\RaksMagazyn.cs" />
+    <Compile Include="BusinessObjects\RaksMetodaPlatnosci.cs" />
     <Compile Include="BusinessObjects\RaksPlatnosci.cs" />
     <Compile Include="BusinessObjects\RaksPozycjeFaktury.cs" />
     <Compile Include="BusinessObjects\RaksReceptura.cs" />
@@ -105,8 +105,9 @@
     <Compile Include="BusinessObjects\RaksSposobPlatnosci.cs" />
     <Compile Include="BusinessObjects\RaksWartoscFakturyWStawkachVatPoZaliczkach.cs" />
     <Compile Include="BusinessObjects\RaksWartosciFakturyWStawkachVat.cs" />
-    <Compile Include="BusinessObjects\StawkaVat.cs" />
+    <Compile Include="BusinessObjects\RaksStawkaVat.cs" />
     <Compile Include="BusinessObjects\RaksWaluta.cs" />
+    <Compile Include="BusinessObjects\RodzajCenySprzedazy.cs" />
     <Compile Include="ChilkatReader.cs" />
     <Compile Include="Controllers\ViewController1.cs">
       <SubType>Component</SubType>

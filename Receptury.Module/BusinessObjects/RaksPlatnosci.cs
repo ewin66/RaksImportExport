@@ -13,16 +13,71 @@ namespace Receptury.Module.BusinessObjects
         { }
 
 
-        //ID_KONTAKTU, Integer,0, Identyfikator kontrahenta,Nie
-        //  ID_SPOSOBU_PLATNOSCI, Integer,0, Identyfikator sposobu zapłaty, Nie
-        //ID_METODY_PLATNOSCI,Integer,0,Identyfikator metody płatności,Nie
-        //ID_ROZRACHUNKU, Integer,0, Identyfikator rozrachunku,Nie
-        //  DATA_PLATNOSCI, Date,0, Data płatności,Nie
-        //WARTOSC_PLN, Float,0, Kwota w PLN, Nie
-        //WARTOSC_WAL,Float,0,Kwota w walucie,Nie
-        //KOD_WALUTY, String,3, Kod waluty dokumentu, Nie
-        //UWAGI,String,8190,Uwagi na temat pozycji, Nie
-        //ZNACZNIKI,BLOB.text,0,Znaczniki pozycji, Nie
+        int idkontaktu;
+        //Identyfikator kontrahenta
+        public int IdKontaktu
+        {
+            get => idkontaktu;
+            set => SetPropertyValue(nameof(IdKontaktu), ref idkontaktu, value);
+        }
+        int idsposobuplatnosci;
+        //Identyfikator sposobu zapłaty
+        public int IdSposobuPlatnosci
+        {
+            get => idsposobuplatnosci;
+            set => SetPropertyValue(nameof(IdSposobuPlatnosci), ref idsposobuplatnosci, value);
+        }
+        int idmetodyplatnosci;
+        //Identyfikator metody płatności
+        public int IdMetodyPlatnosci
+        {
+            get => idmetodyplatnosci;
+            set => SetPropertyValue(nameof(IdMetodyPlatnosci), ref idmetodyplatnosci, value);
+        }
+        int idrozrachunku;
+        //Identyfikator rozrachunku
+        public int IdRozrachunku
+        {
+            get => idrozrachunku;
+            set => SetPropertyValue(nameof(IdRozrachunku), ref idrozrachunku, value);
+        }
+        DateTime dataplatnosci;
+        //Data płatności
+        public DateTime DataPlatnosci
+        {
+            get => dataplatnosci;
+            set => SetPropertyValue(nameof(DataPlatnosci), ref dataplatnosci, value);
+        }
+        decimal wartoscpln;
+        //Kwota w PLN
+        public decimal WartoscPln
+        {
+            get => wartoscpln;
+            set => SetPropertyValue(nameof(WartoscPln), ref wartoscpln, value);
+        }
+        decimal wartoscwal;
+        //Kwota w walucie
+        public decimal WartoscWal
+        {
+            get => wartoscwal;
+            set => SetPropertyValue(nameof(WartoscWal), ref wartoscwal, value);
+        }
+        string kodwaluty;
+        //Kod waluty dokumentu
+        [Size(3)]
+        public string KodWaluty
+        {
+            get => kodwaluty;
+            set => SetPropertyValue(nameof(KodWaluty), ref kodwaluty, value);
+        }
+
+        string znaczniki;
+        //Znaczniki pozycji
+        public string Znaczniki
+        {
+            get => znaczniki;
+            set => SetPropertyValue(nameof(Znaczniki), ref znaczniki, value);
+        }
 
 
         string uwagi;

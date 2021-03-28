@@ -7,23 +7,105 @@ using System.Threading.Tasks;
 
 namespace Receptury.Module.BusinessObjects
 {
-    public class RaksRozrachunek : XPObject
+    public class RaksRozrachunek : XPCustomObject
     {
         public RaksRozrachunek(Session session) : base(session)
         { }
 
-        //        ID,Integer,0,Unikalny identyfikator rozrachunku,Tak
-        //TYP_ROZR, String,1,"N-należność, Z-zobowiązanie", Tak
-        //ID_KONTAKTU,Integer,0,Identyfikator kontaktu w zbiorze kontaktów,Tak
-        //KOD_WAL, String,3, Kod waluty lub PLN,Tak
-        //  DATA_OPER, Date,0, Data operacji,Tak
-        //    DATA_PLAT, Date,0, Data płatności,Nie
-        //      KWOTA, Float,0, Kwota początkowa rozrachunku, Tak
-        //KWOTA_WAL,Float,0,Kwota początkowa rozrachunku w walucie(lub 0),Tak
-        //OPIS, String,255, Opis rozrachunku,Nie
-        // KONTAKT_NAZWA_SKROCONA, String,50, Nazwa skrócona kontaktu, Nie
-        //KONTAKT_NIP,String,25,NIP kontaktu, Nie
-        //MECHANIZM_PODZIELONEJ_PLATNOSCI,Integer,0,Mechanizm podzielonej płatności,Nie
+        int id;
+        //Unikalny identyfikator rozrachunku
+        [Key(false)]
+        public int Id
+        {
+            get => id;
+            set => SetPropertyValue(nameof(Id), ref id, value);
+        }
+        string typrozr;
+        //N-należność, Z-zobowiązanie
+        [Size(1)]
+        public string TypRozr
+        {
+            get => typrozr;
+            set => SetPropertyValue(nameof(TypRozr), ref typrozr, value);
+        }
+        int idkontaktu;
+        //Identyfikator kontaktu w zbiorze kontaktów
+        public int IdKontaktu
+        {
+            get => idkontaktu;
+            set => SetPropertyValue(nameof(IdKontaktu), ref idkontaktu, value);
+        }
+        string kodwal;
+        //Kod waluty lub PLN
+        [Size(3)]
+        public string KodWal
+        {
+            get => kodwal;
+            set => SetPropertyValue(nameof(KodWal), ref kodwal, value);
+        }
+        DateTime dataoper;
+        ///Data operacji
+        public DateTime DataOper
+        {
+            get => dataoper;
+            set => SetPropertyValue(nameof(DataOper), ref dataoper, value);
+        }
+        DateTime dataplat;
+        ///Data płatności
+        public DateTime DataPlat
+        {
+            get => dataplat;
+            set => SetPropertyValue(nameof(DataPlat), ref dataplat, value);
+        }
+        decimal kwota;
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+        public decimal Kwota
+        {
+            get => kwota;
+            set => SetPropertyValue(nameof(Kwota), ref kwota, value);
+        }
+        decimal kwotawal;
+        //Kwota początkowa rozrachunku w walucie (lub 0)
+        public decimal KwotaWal
+        {
+            get => kwotawal;
+            set => SetPropertyValue(nameof(KwotaWal), ref kwotawal, value);
+        }
+        string opis;
+        //Opis rozrachunku
+        [Size(255)]
+        public string Opis
+        {
+            get => opis;
+            set => SetPropertyValue(nameof(Opis), ref opis, value);
+        }
+        string kontaktnazwaskrocona;
+        //Nazwa skrócona kontaktu
+        [Size(50)]
+        public string KontaktNazwaSkrocona
+        {
+            get => kontaktnazwaskrocona;
+            set => SetPropertyValue(nameof(KontaktNazwaSkrocona), ref kontaktnazwaskrocona, value);
+        }
+        string kontaktnip;
+        //NIP kontaktu
+        [Size(25)]
+        public string KontaktNip
+        {
+            get => kontaktnip;
+            set => SetPropertyValue(nameof(KontaktNip), ref kontaktnip, value);
+        }
+        int mechanizmpodzielonejplatnosci;
+        //Mechanizm podzielonej płatności
+        public int MechanizmPodzielonejPlatnosci
+        {
+            get => mechanizmpodzielonejplatnosci;
+            set => SetPropertyValue(nameof(MechanizmPodzielonejPlatnosci), ref mechanizmpodzielonejplatnosci, value);
+        }
 
 
         RaksFaktura faktura;

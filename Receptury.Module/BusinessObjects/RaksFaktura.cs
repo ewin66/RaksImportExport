@@ -14,420 +14,755 @@ namespace Receptury.Module.BusinessObjects
         public RaksFaktura(Session session) : base(session)
         { }
 
-        //_NAZWA,_TYP,_SZEROKOSC,_OPIS,_WYMAGANE
-        //ID,Integer,0,Identyfikator rekordu,Tak
-
-        bool mechanizmPodzielonejPlatnosci;
-        string kodKrajuPrzeznaczenia;
-        DateTime dataZmiany;
-        string zmienil;
-        DateTime dataPodpisania;
-        string wystawil;
-        string uwagi;
-        decimal wartoscZlotowkowaOpkKaucjonowanych;
-        decimal wartoscSprzedazyOpkKaucjonowanych;
-        decimal wartoscBruttoZlotowkowa;
-        decimal kwotaVatZlotowkowa;
-        decimal wartoscVatZlotowkowa;
-        decimal wartoscNettoZlotowkowa;
-        decimal wartoscBruttoSprzedazy;
-        decimal kwotaVatSprzedazy;
-        decimal wartoscNettoSprzdazy;
-        DateTime dataPlatnosci;
-        RaksSposobPlatnosci sposobPlatnosci;
-        DateTime dataSprzedazy;
-        int sposobWyliczania;
-        decimal kursWaluty;
-        decimal mnoznikWaluty;
-        RaksWaluta waluta;
-        string idTabeliKursowej;
-        string idRodzajuCen;
-        string idRodzajuRabatu;
-        RaksKontakt akwizytor;
-        string idAkwizytora;
-        RaksKontakt odbiorca;
-        RaksKontakt nabywca;
-        bool zafiskalizowany;
-        int blokada;
-        bool transakcjaTrojstronna;
-        string nazwaDokumentu;
-        string nrDokumentu;
-        DateTime dataWystawienia;
-        string kodDokumentu;
-        string rodzajDokumentuSprzedazy;
-        RaksMagazyn magazyn;
         int id;
-        [Key(true)]
+        //Identyfikator rekordu
+        [Key(false)]
         public int Id
         {
             get => id;
             set => SetPropertyValue(nameof(Id), ref id, value);
         }
-
-
-        public RaksMagazyn Magazyn
+        int idmagazynu;
+        //Identyfikator magazynu
+        public int IdMagazynu
         {
-            get => magazyn;
-            set => SetPropertyValue(nameof(Magazyn), ref magazyn, value);
+            get => idmagazynu;
+            set => SetPropertyValue(nameof(IdMagazynu), ref idmagazynu, value);
         }
-        //ID_MAGAZYNU,Integer,0,Identyfikator magazynu,Tak
-        //NUMER_MAGAZYNU,String,5,Numer magazynu,Tak
-        //NAZWA_MAGAZYNU,String,25,Nazwa magazynu,Tak
-
-        //ANALITYKA_FK_MAGAZYNU,String,20,Numer analityki konta FK magazynu,Nie
-        //ID_SPRZEDAWCY,Integer,0,Identyfikator sprzedawcy (-1 - dane firmy; -ID-1 - dane filii),Tak
-        //NAZWA_SKROCONA_SPRZEDAWCY,String,50,Nazwa skrócona sprzedawcy,Tak
-        //NAZWA_PELNA_SPRZEDAWCY,String,200,Nazwa pełna sprzedawcy,Tak
-        //NIP_SPRZEDAWCY,String,25,Numer NIP sprzedawcy,Nie
-        //KOD_KRESKOWY_SPRZEDAWCY,String,40,Kod kreskowy sprzedawcy,Nie
-
-
-
-        //RODZAJ_DOK_SPRZEDAZY,String,3,"Rodzaj dokumentu sprzedaży, możliwe wartości to: PA - paragon, FS - faktura VAT, FE - faktura eksportowa",Tak
-        [Size(SizeAttribute.DefaultStringMappingFieldSize)]
-        public string RodzajDokumentuSprzedazy
+        string numermagazynu;
+        //Numer magazynu
+        [Size(5)]
+        public string NumerMagazynu
         {
-            get => rodzajDokumentuSprzedazy;
-            set => SetPropertyValue(nameof(RodzajDokumentuSprzedazy), ref rodzajDokumentuSprzedazy, value);
+            get => numermagazynu;
+            set => SetPropertyValue(nameof(NumerMagazynu), ref numermagazynu, value);
         }
-
-        //KOD_DOKUMENTU,String,5,Kod dokumentu,Tak
-
-
-        [Size(SizeAttribute.DefaultStringMappingFieldSize)]
+        string nazwamagazynu;
+        //Nazwa magazynu
+        [Size(25)]
+        public string NazwaMagazynu
+        {
+            get => nazwamagazynu;
+            set => SetPropertyValue(nameof(NazwaMagazynu), ref nazwamagazynu, value);
+        }
+        string analitykafkmagazynu;
+        //Numer analityki konta FK magazynu
+        [Size(20)]
+        public string AnalitykaFkMagazynu
+        {
+            get => analitykafkmagazynu;
+            set => SetPropertyValue(nameof(AnalitykaFkMagazynu), ref analitykafkmagazynu, value);
+        }
+        int idsprzedawcy;
+        //Identyfikator sprzedawcy (-1 - dane firmy; -ID-1 - dane filii)
+        public int IdSprzedawcy
+        {
+            get => idsprzedawcy;
+            set => SetPropertyValue(nameof(IdSprzedawcy), ref idsprzedawcy, value);
+        }
+        string nazwaskroconasprzedawcy;
+        //Nazwa skrócona sprzedawcy
+        [Size(50)]
+        public string NazwaSkroconaSprzedawcy
+        {
+            get => nazwaskroconasprzedawcy;
+            set => SetPropertyValue(nameof(NazwaSkroconaSprzedawcy), ref nazwaskroconasprzedawcy, value);
+        }
+        string nazwapelnasprzedawcy;
+        //Nazwa pełna sprzedawcy
+        [Size(200)]
+        public string NazwaPelnaSprzedawcy
+        {
+            get => nazwapelnasprzedawcy;
+            set => SetPropertyValue(nameof(NazwaPelnaSprzedawcy), ref nazwapelnasprzedawcy, value);
+        }
+        string nipsprzedawcy;
+        //Numer NIP sprzedawcy
+        [Size(25)]
+        public string NipSprzedawcy
+        {
+            get => nipsprzedawcy;
+            set => SetPropertyValue(nameof(NipSprzedawcy), ref nipsprzedawcy, value);
+        }
+        string kodkreskowysprzedawcy;
+        //Kod kreskowy sprzedawcy
+        [Size(40)]
+        public string KodKreskowySprzedawcy
+        {
+            get => kodkreskowysprzedawcy;
+            set => SetPropertyValue(nameof(KodKreskowySprzedawcy), ref kodkreskowysprzedawcy, value);
+        }
+        string rodzajdoksprzedazy;
+        //Rodzaj dokumentu sprzedaży, możliwe wartości to: PA - paragon, FS - faktura VAT, FE - faktura eksportowa
+        [Size(3)]
+        public string RodzajDokSprzedazy
+        {
+            get => rodzajdoksprzedazy;
+            set => SetPropertyValue(nameof(RodzajDokSprzedazy), ref rodzajdoksprzedazy, value);
+        }
+        string koddokumentu;
+        //Kod dokumentu
+        [Size(5)]
         public string KodDokumentu
         {
-            get => kodDokumentu;
-            set => SetPropertyValue(nameof(KodDokumentu), ref kodDokumentu, value);
+            get => koddokumentu;
+            set => SetPropertyValue(nameof(KodDokumentu), ref koddokumentu, value);
         }
-        //DATA_WYSTAWIENIA,Date,0,Data wystawienia dokumentu (data operacji),Tak
-
+        DateTime datawystawienia;
+        //Data wystawienia dokumentu (data operacji)
         public DateTime DataWystawienia
         {
-            get => dataWystawienia;
-            set => SetPropertyValue(nameof(DataWystawienia), ref dataWystawienia, value);
+            get => datawystawienia;
+            set => SetPropertyValue(nameof(DataWystawienia), ref datawystawienia, value);
         }
-        //NUMER_DOKUMENTU,String,255,Numer dokumentu,Tak
-
-        [Size(SizeAttribute.DefaultStringMappingFieldSize)]
-        public string NrDokumentu
-        {
-            get => nrDokumentu;
-            set => SetPropertyValue(nameof(NrDokumentu), ref nrDokumentu, value);
-        }
-
-        //NAZWA_DOKUMENTU,String,250,Nazwa dokumentu,Tak
-
-
+        string numerdokumentu;
+        //Numer dokumentu
         [Size(255)]
+        public string NumerDokumentu
+        {
+            get => numerdokumentu;
+            set => SetPropertyValue(nameof(NumerDokumentu), ref numerdokumentu, value);
+        }
+        string nazwadokumentu;
+        //Nazwa dokumentu
+        [Size(250)]
         public string NazwaDokumentu
         {
-            get => nazwaDokumentu;
-            set => SetPropertyValue(nameof(NazwaDokumentu), ref nazwaDokumentu, value);
+            get => nazwadokumentu;
+            set => SetPropertyValue(nameof(NazwaDokumentu), ref nazwadokumentu, value);
         }
-        //TRANSAKCJA_TROJSTRONNA,Boolean,0,Czy transakcja trojstronna,Tak
-
+        bool transakcjatrojstronna;
+        //Czy transakcja trojstronna
         public bool TransakcjaTrojstronna
         {
-            get => transakcjaTrojstronna;
-            set => SetPropertyValue(nameof(TransakcjaTrojstronna), ref transakcjaTrojstronna, value);
+            get => transakcjatrojstronna;
+            set => SetPropertyValue(nameof(TransakcjaTrojstronna), ref transakcjatrojstronna, value);
         }
-
-        //SYGNATURA,String,100,Sygnatura dokumentu,Nie
-        //ZNACZNIKI,BLOB.text,0,Znaczniki dokumentu,Nie
-        //ANALITYKA_FK,String,20,Numer analityki konta FK,Nie
-        //BLOKADA,Integer,0,"Status blokad dokumentu określany bitowo:
+        string sygnatura;
+        //Sygnatura dokumentu
+        [Size(100)]
+        public string Sygnatura
+        {
+            get => sygnatura;
+            set => SetPropertyValue(nameof(Sygnatura), ref sygnatura, value);
+        }
+        string znaczniki;
+        //Znaczniki dokumentu
+        public string Znaczniki
+        {
+            get => znaczniki;
+            set => SetPropertyValue(nameof(Znaczniki), ref znaczniki, value);
+        }
+        string analitykafk;
+        //Numer analityki konta FK
+        [Size(20)]
+        public string AnalitykaFk
+        {
+            get => analitykafk;
+            set => SetPropertyValue(nameof(AnalitykaFk), ref analitykafk, value);
+        }
+        int blokada;
+        //Status blokad dokumentu określany bitowo:
         // ustawiony bit 1 - dokument zablokowany
         // ustawiony bit 2 - dokument zaksięgowany
         // bit 3 - zarezerwowane, wpisywać zawsze 0
-        // ustawiony bit 1 - dokument zablokowany przez moduł FK",Tak
-
-
+        // ustawiony bit 1 - dokument zablokowany przez moduł FK
         public int Blokada
         {
             get => blokada;
             set => SetPropertyValue(nameof(Blokada), ref blokada, value);
         }
-        //ZAFISKALIZOWANY,Boolean,0,Czy dokument został już zafiskalizowany,Tak
-
+        bool zafiskalizowany;
+        //Czy dokument został już zafiskalizowany
         public bool Zafiskalizowany
         {
             get => zafiskalizowany;
             set => SetPropertyValue(nameof(Zafiskalizowany), ref zafiskalizowany, value);
         }
-        //ID_NABYWCY,Integer,0,Identyfikator nabywcy z sekcji KONTAKTY,Tak
-        //NAZWA_SKROCONA_NABYWCY,String,50,"Nazwa skrócona nabywcy, dla paragonów Sprzedaż detaliczna",Tak
-        //NAZWA_PELNA_NABYWCY,String,250,"Nazwa pełna nabywcy, pole nie wymagane dla paragonów",Tak
-        //KOD_KRESKOWY_NABYWCY,String,40,"Kod kreskowy nabywcy, pole nie wymagane dla paragonów",Nie
-        //NIP_NABYWCY,String,25,"Numer NIP nabywcy, pole nie wymagane dla paragonów",Nie
-        //ULICA_NABYWCY,String,50,"Nazwa ulicy, przy której jest siedziba nabywcy",Nie
-        //NR_DOMU_NABYWCY,String,10,"Numer budynku, w którym mieści się siedziba nabywcy",Nie
-        //NR_LOKALU_NABYWCY,String,10,"Numer lokalu, w którym mieści się siedziba nabywcy",Nie
-        //KOD_POCZTOWY_NABYWCY,String,10,"Kod pocztowy miejscowości, w której mieści się siedziba nabywcy",Nie
-        //MIEJSCOWOSC_NABYWCY,String,50,"Miejscowość, w której znajduje się siedziba nabywcy",Nie
-        //PANSTWO_NABYWCY,String,25,"Państwo, w którym znajduje się siedziba nabywcy",Nie
-        //CZY_NABYWCA_PLATNIKIEM_VAT,Boolean,0,Czy nabywca jest płatnikiem VAT,Tak
-
-
-        public RaksKontakt Nabywca
+        int idnabywcy;
+        //Identyfikator nabywcy z sekcji KONTAKTY
+        public int IdNabywcy
         {
-            get => nabywca;
-            set => SetPropertyValue(nameof(Nabywca), ref nabywca, value);
+            get => idnabywcy;
+            set => SetPropertyValue(nameof(IdNabywcy), ref idnabywcy, value);
         }
-        //ID_ODBIORCY,Integer,0,Identyfikator odbiorcy z sekcji KONTAKTY,Tak
-        //NAZWA_SKROCONA_ODBIORCY,String,50,"Nazwa skrócona odbiorcy, dla paragonów Sprzedaż detaliczna",Tak
-        //NAZWA_PELNA_ODBIORCY,String,250,nazwa pełna odbiorcy; pole nie wymagane dla paragonów,Tak
-        //KOD_KRESKOWY_ODBIORCY,String,40,Kod kreskowy odbiorcy; pole nie wymagane dla paragonów,Nie
-        //NIP_ODBIORCY,String,25,Numer NIP odbiorcy; pole nie wymagane dla paragonów,Nie
-        //ULICA_ODBIORCY,String,50,"Nazwa ulicy, przy której jest siedziba odbiorcy",Nie
-        //NR_DOMU_ODBIORCY,String,10,"Numer budynku, w którym mieści się siedziba odbiorcy",Nie
-        //NR_LOKALU_ODBIORCY,String,10,"Numer lokalu, w którym mieści się siedziba odbiorcy",Nie
-        //KOD_POCZTOWY_ODBIORCY,String,10,"Kod pocztowy miejscowości, w której mieści się siedziba odbiorcy",Nie
-        //MIEJSCOWOSC_ODBIORCY,String,50,"Miejscowość, w której znajduje się siedziba odbiorcy",Nie
-        //PANSTWO_ODBIORCY,String,25,"Państwo, w którym znajduje się siedziba odbiorcy",Nie
-        //CZY_ODBIORCA_PLATNIKIEM_VAT,Boolean,0,Czy odbiorca jest płatnikiem VAT,Tak
-
-
-        public RaksKontakt Odbiorca
+        string nazwaskroconanabywcy;
+        //Nazwa skrócona nabywcy, dla paragonów Sprzedaż detaliczna
+        [Size(50)]
+        public string NazwaSkroconaNabywcy
         {
-            get => odbiorca;
-            set => SetPropertyValue(nameof(Odbiorca), ref odbiorca, value);
+            get => nazwaskroconanabywcy;
+            set => SetPropertyValue(nameof(NazwaSkroconaNabywcy), ref nazwaskroconanabywcy, value);
         }
-
-        //ID_AKWIZYTORA,Integer,0,Identyfikator akwizytora z sekcji KONTAKTY,Tak
-
-
-
-        public RaksKontakt Akwizytor
+        string nazwapelnanabywcy;
+        //Nazwa pełna nabywcy, pole nie wymagane dla paragonów
+        [Size(250)]
+        public string NazwaPelnaNabywcy
         {
-            get => akwizytor;
-            set => SetPropertyValue(nameof(Akwizytor), ref akwizytor, value);
+            get => nazwapelnanabywcy;
+            set => SetPropertyValue(nameof(NazwaPelnaNabywcy), ref nazwapelnanabywcy, value);
         }
-        //NAZWA_SKROCONA_AKWIZYTORA,String,50,Nazwa skrócona akwizytora,Nie
-        //NAZWA_PELNA_AKWIZYTORA,String,250,Nazwa pełna akwizytora,Nie
-        //KOD_KRESKOWY_AKWIZYTORA,String,40,Kod kreskowy akwizytora,Nie
-        //NIP_AKWIZYTORA,String,25,Numer NIP akwizytora,Nie
-
-        [Size(SizeAttribute.DefaultStringMappingFieldSize)]
-        public string IdRodzajuRabatu
+        string kodkreskowynabywcy;
+        //Kod kreskowy nabywcy, pole nie wymagane dla paragonów
+        [Size(40)]
+        public string KodKreskowyNabywcy
         {
-            get => idRodzajuRabatu;
-            set => SetPropertyValue(nameof(IdRodzajuRabatu), ref idRodzajuRabatu, value);
+            get => kodkreskowynabywcy;
+            set => SetPropertyValue(nameof(KodKreskowyNabywcy), ref kodkreskowynabywcy, value);
         }
-        //ID_RODZAJU_RABATU,Integer,0,Identyfikator rodzaju rabatu z sekcji RABATY,Tak
-        //NAZWA_RODZAJU_RABATU,String,50,"Nazwa rodzaju rabatu, używana do wyszukiwania, jeśli odnalezienie po ID_RODZAJU_RABATU nie powiedzie się",Nie
-
-        [Size(SizeAttribute.DefaultStringMappingFieldSize)]
-        public string IdRodzajuCen
+        string nipnabywcy;
+        //Numer NIP nabywcy, pole nie wymagane dla paragonów
+        [Size(25)]
+        public string NipNabywcy
         {
-            get => idRodzajuCen;
-            set => SetPropertyValue(nameof(IdRodzajuCen), ref idRodzajuCen, value);
+            get => nipnabywcy;
+            set => SetPropertyValue(nameof(NipNabywcy), ref nipnabywcy, value);
         }
-        //ID_RODZAJU_CEN,Integer,0,Identyfikator rodzaju ceny sprzedaży z sekcji RODZAJE_CEN_SPRZEDAZY,Tak
-        //NAZWA_RODZAJU_CEN,String,25,"Nazwa rodzaju cany sprzedaży, używana do wyszukiwania, jeśli odnalezienie po ID_RODZAJU_CEN nie powiedzie się",Nie
-
-        //OSOBA_UPOWAZNIONA_DO_ODB_TOWARU,String,30,Nazwisko osoby upoważnionej do odbioru towaru i podpisania faktury,Nie
-        //ID_TABELI_KURSOWEJ,Integer,0,Identyfikator użytej tabeli kursowej,Tak
-
-
-        [Size(SizeAttribute.DefaultStringMappingFieldSize)]
-        public string IdTabeliKursowej
+        string ulicanabywcy;
+        //Nazwa ulicy, przy której jest siedziba nabywcy
+        [Size(50)]
+        public string UlicaNabywcy
         {
-            get => idTabeliKursowej;
-            set => SetPropertyValue(nameof(IdTabeliKursowej), ref idTabeliKursowej, value);
+            get => ulicanabywcy;
+            set => SetPropertyValue(nameof(UlicaNabywcy), ref ulicanabywcy, value);
         }
-        //NUMER_TABELI_KURSOWEJ,String,25,Numer użytej tabeli kursowej,Nie
-
-        public RaksWaluta Waluta
+        string nrdomunabywcy;
+        //Numer budynku, w którym mieści się siedziba nabywcy
+        [Size(10)]
+        public string NrDomuNabywcy
         {
-            get => waluta;
-            set => SetPropertyValue(nameof(Waluta), ref waluta, value);
+            get => nrdomunabywcy;
+            set => SetPropertyValue(nameof(NrDomuNabywcy), ref nrdomunabywcy, value);
         }
-        //ID_WALUTY_DOKUMENTU,Integer,0,Identyfikator waluty dokumentu,Tak
-        //KOD_WALUTY_DOKUMENTU,String,5,Kod waluty dokumentu,Tak
-        //NAZWA_WALUTY_DOKUMENTU,String,50,Nazwa waluty dokumentu,Tak
-        //MNOZNIK_WALUTY_DOKUMENTU,Integer,0,Mnożnik waluty dokumentu,Tak
-
-        public decimal MnoznikWaluty
+        string nrlokalunabywcy;
+        //Numer lokalu, w którym mieści się siedziba nabywcy
+        [Size(10)]
+        public string NrLokaluNabywcy
         {
-            get => mnoznikWaluty;
-            set => SetPropertyValue(nameof(MnoznikWaluty), ref mnoznikWaluty, value);
+            get => nrlokalunabywcy;
+            set => SetPropertyValue(nameof(NrLokaluNabywcy), ref nrlokalunabywcy, value);
         }
-
-        //KURS_WALUTY_DOKUMENTU,Float,0,Kurs waluty dokumentu wynikający z tabeli kursowej,Tak
-
-        public decimal KursWaluty
+        string kodpocztowynabywcy;
+        //Kod pocztowy miejscowości, w której mieści się siedziba nabywcy
+        [Size(10)]
+        public string KodPocztowyNabywcy
         {
-            get => kursWaluty;
-            set => SetPropertyValue(nameof(KursWaluty), ref kursWaluty, value);
+            get => kodpocztowynabywcy;
+            set => SetPropertyValue(nameof(KodPocztowyNabywcy), ref kodpocztowynabywcy, value);
         }
-        //SPOSOB_WYLICZANIA_DOKUMENTU,Integer,0,"Sposób wyliczania wartości dokumentu, możliwe wartości to: 0 - od netto, 1 - od brutto, 2 - sumy",Tak
-
-
-        public int SposobWyliczania
+        string miejscowoscnabywcy;
+        //Miejscowość, w której znajduje się siedziba nabywcy
+        [Size(50)]
+        public string MiejscowoscNabywcy
         {
-            get => sposobWyliczania;
-            set => SetPropertyValue(nameof(SposobWyliczania), ref sposobWyliczania, value);
+            get => miejscowoscnabywcy;
+            set => SetPropertyValue(nameof(MiejscowoscNabywcy), ref miejscowoscnabywcy, value);
         }
-
-
+        string panstwonabywcy;
+        //Państwo, w którym znajduje się siedziba nabywcy
+        [Size(25)]
+        public string PanstwoNabywcy
+        {
+            get => panstwonabywcy;
+            set => SetPropertyValue(nameof(PanstwoNabywcy), ref panstwonabywcy, value);
+        }
+        bool czynabywcaplatnikiemvat;
+        //Czy nabywca jest płatnikiem VAT
+        public bool CzyNabywcaPlatnikiemVat
+        {
+            get => czynabywcaplatnikiemvat;
+            set => SetPropertyValue(nameof(CzyNabywcaPlatnikiemVat), ref czynabywcaplatnikiemvat, value);
+        }
+        int idodbiorcy;
+        //Identyfikator odbiorcy z sekcji KONTAKTY
+        public int IdOdbiorcy
+        {
+            get => idodbiorcy;
+            set => SetPropertyValue(nameof(IdOdbiorcy), ref idodbiorcy, value);
+        }
+        string nazwaskroconaodbiorcy;
+        //Nazwa skrócona odbiorcy, dla paragonów Sprzedaż detaliczna
+        [Size(50)]
+        public string NazwaSkroconaOdbiorcy
+        {
+            get => nazwaskroconaodbiorcy;
+            set => SetPropertyValue(nameof(NazwaSkroconaOdbiorcy), ref nazwaskroconaodbiorcy, value);
+        }
+        string nazwapelnaodbiorcy;
+        //nazwa pełna odbiorcy; pole nie wymagane dla paragonów
+        [Size(250)]
+        public string NazwaPelnaOdbiorcy
+        {
+            get => nazwapelnaodbiorcy;
+            set => SetPropertyValue(nameof(NazwaPelnaOdbiorcy), ref nazwapelnaodbiorcy, value);
+        }
+        string kodkreskowyodbiorcy;
+        //Kod kreskowy odbiorcy; pole nie wymagane dla paragonów
+        [Size(40)]
+        public string KodKreskowyOdbiorcy
+        {
+            get => kodkreskowyodbiorcy;
+            set => SetPropertyValue(nameof(KodKreskowyOdbiorcy), ref kodkreskowyodbiorcy, value);
+        }
+        string nipodbiorcy;
+        //Numer NIP odbiorcy; pole nie wymagane dla paragonów
+        [Size(25)]
+        public string NipOdbiorcy
+        {
+            get => nipodbiorcy;
+            set => SetPropertyValue(nameof(NipOdbiorcy), ref nipodbiorcy, value);
+        }
+        string ulicaodbiorcy;
+        //Nazwa ulicy, przy której jest siedziba odbiorcy
+        [Size(50)]
+        public string UlicaOdbiorcy
+        {
+            get => ulicaodbiorcy;
+            set => SetPropertyValue(nameof(UlicaOdbiorcy), ref ulicaodbiorcy, value);
+        }
+        string nrdomuodbiorcy;
+        //Numer budynku, w którym mieści się siedziba odbiorcy
+        [Size(10)]
+        public string NrDomuOdbiorcy
+        {
+            get => nrdomuodbiorcy;
+            set => SetPropertyValue(nameof(NrDomuOdbiorcy), ref nrdomuodbiorcy, value);
+        }
+        string nrlokaluodbiorcy;
+        //Numer lokalu, w którym mieści się siedziba odbiorcy
+        [Size(10)]
+        public string NrLokaluOdbiorcy
+        {
+            get => nrlokaluodbiorcy;
+            set => SetPropertyValue(nameof(NrLokaluOdbiorcy), ref nrlokaluodbiorcy, value);
+        }
+        string kodpocztowyodbiorcy;
+        //Kod pocztowy miejscowości, w której mieści się siedziba odbiorcy
+        [Size(10)]
+        public string KodPocztowyOdbiorcy
+        {
+            get => kodpocztowyodbiorcy;
+            set => SetPropertyValue(nameof(KodPocztowyOdbiorcy), ref kodpocztowyodbiorcy, value);
+        }
+        string miejscowoscodbiorcy;
+        //Miejscowość, w której znajduje się siedziba odbiorcy
+        [Size(50)]
+        public string MiejscowoscOdbiorcy
+        {
+            get => miejscowoscodbiorcy;
+            set => SetPropertyValue(nameof(MiejscowoscOdbiorcy), ref miejscowoscodbiorcy, value);
+        }
+        string panstwoodbiorcy;
+        //Państwo, w którym znajduje się siedziba odbiorcy
+        [Size(25)]
+        public string PanstwoOdbiorcy
+        {
+            get => panstwoodbiorcy;
+            set => SetPropertyValue(nameof(PanstwoOdbiorcy), ref panstwoodbiorcy, value);
+        }
+        bool czyodbiorcaplatnikiemvat;
+        //Czy odbiorca jest płatnikiem VAT
+        public bool CzyOdbiorcaPlatnikiemVat
+        {
+            get => czyodbiorcaplatnikiemvat;
+            set => SetPropertyValue(nameof(CzyOdbiorcaPlatnikiemVat), ref czyodbiorcaplatnikiemvat, value);
+        }
+        int idakwizytora;
+        //Identyfikator akwizytora z sekcji KONTAKTY
+        public int IdAkwizytora
+        {
+            get => idakwizytora;
+            set => SetPropertyValue(nameof(IdAkwizytora), ref idakwizytora, value);
+        }
+        string nazwaskroconaakwizytora;
+        //Nazwa skrócona akwizytora
+        [Size(50)]
+        public string NazwaSkroconaAkwizytora
+        {
+            get => nazwaskroconaakwizytora;
+            set => SetPropertyValue(nameof(NazwaSkroconaAkwizytora), ref nazwaskroconaakwizytora, value);
+        }
+        string nazwapelnaakwizytora;
+        //Nazwa pełna akwizytora
+        [Size(250)]
+        public string NazwaPelnaAkwizytora
+        {
+            get => nazwapelnaakwizytora;
+            set => SetPropertyValue(nameof(NazwaPelnaAkwizytora), ref nazwapelnaakwizytora, value);
+        }
+        string kodkreskowyakwizytora;
+        //Kod kreskowy akwizytora
+        [Size(40)]
+        public string KodKreskowyAkwizytora
+        {
+            get => kodkreskowyakwizytora;
+            set => SetPropertyValue(nameof(KodKreskowyAkwizytora), ref kodkreskowyakwizytora, value);
+        }
+        string nipakwizytora;
+        //Numer NIP akwizytora
+        [Size(25)]
+        public string NipAkwizytora
+        {
+            get => nipakwizytora;
+            set => SetPropertyValue(nameof(NipAkwizytora), ref nipakwizytora, value);
+        }
+        int idrodzajurabatu;
+        //Identyfikator rodzaju rabatu z sekcji RABATY
+        public int IdRodzajuRabatu
+        {
+            get => idrodzajurabatu;
+            set => SetPropertyValue(nameof(IdRodzajuRabatu), ref idrodzajurabatu, value);
+        }
+        string nazwarodzajurabatu;
+        //Nazwa rodzaju rabatu, używana do wyszukiwania, jeśli odnalezienie po ID_RODZAJU_RABATU nie powiedzie się
+        [Size(50)]
+        public string NazwaRodzajuRabatu
+        {
+            get => nazwarodzajurabatu;
+            set => SetPropertyValue(nameof(NazwaRodzajuRabatu), ref nazwarodzajurabatu, value);
+        }
+        int idrodzajucen;
+        //Identyfikator rodzaju ceny sprzedaży z sekcji RODZAJE_CEN_SPRZEDAZY
+        public int IdRodzajuCen
+        {
+            get => idrodzajucen;
+            set => SetPropertyValue(nameof(IdRodzajuCen), ref idrodzajucen, value);
+        }
+        string nazwarodzajucen;
+        //Nazwa rodzaju cany sprzedaży, używana do wyszukiwania, jeśli odnalezienie po ID_RODZAJU_CEN nie powiedzie się
+        [Size(25)]
+        public string NazwaRodzajuCen
+        {
+            get => nazwarodzajucen;
+            set => SetPropertyValue(nameof(NazwaRodzajuCen), ref nazwarodzajucen, value);
+        }
+        string osobaupowaznionadoodbtowaru;
+        //Nazwisko osoby upoważnionej do odbioru towaru i podpisania faktury
+        [Size(30)]
+        public string OsobaUpowaznionaDoOdbTowaru
+        {
+            get => osobaupowaznionadoodbtowaru;
+            set => SetPropertyValue(nameof(OsobaUpowaznionaDoOdbTowaru), ref osobaupowaznionadoodbtowaru, value);
+        }
+        int idtabelikursowej;
+        //Identyfikator użytej tabeli kursowej
+        public int IdTabeliKursowej
+        {
+            get => idtabelikursowej;
+            set => SetPropertyValue(nameof(IdTabeliKursowej), ref idtabelikursowej, value);
+        }
+        string numertabelikursowej;
+        //Numer użytej tabeli kursowej
+        [Size(25)]
+        public string NumerTabeliKursowej
+        {
+            get => numertabelikursowej;
+            set => SetPropertyValue(nameof(NumerTabeliKursowej), ref numertabelikursowej, value);
+        }
+        int idwalutydokumentu;
+        //Identyfikator waluty dokumentu
+        public int IdWalutyDokumentu
+        {
+            get => idwalutydokumentu;
+            set => SetPropertyValue(nameof(IdWalutyDokumentu), ref idwalutydokumentu, value);
+        }
+        string kodwalutydokumentu;
+        //Kod waluty dokumentu
+        [Size(5)]
+        public string KodWalutyDokumentu
+        {
+            get => kodwalutydokumentu;
+            set => SetPropertyValue(nameof(KodWalutyDokumentu), ref kodwalutydokumentu, value);
+        }
+        string nazwawalutydokumentu;
+        //Nazwa waluty dokumentu
+        [Size(50)]
+        public string NazwaWalutyDokumentu
+        {
+            get => nazwawalutydokumentu;
+            set => SetPropertyValue(nameof(NazwaWalutyDokumentu), ref nazwawalutydokumentu, value);
+        }
+        int mnoznikwalutydokumentu;
+        //Mnożnik waluty dokumentu
+        public int MnoznikWalutyDokumentu
+        {
+            get => mnoznikwalutydokumentu;
+            set => SetPropertyValue(nameof(MnoznikWalutyDokumentu), ref mnoznikwalutydokumentu, value);
+        }
+        decimal kurswalutydokumentu;
+        //Kurs waluty dokumentu wynikający z tabeli kursowej
+        public decimal KursWalutyDokumentu
+        {
+            get => kurswalutydokumentu;
+            set => SetPropertyValue(nameof(KursWalutyDokumentu), ref kurswalutydokumentu, value);
+        }
+        int sposobwyliczaniadokumentu;
+        //Sposób wyliczania wartości dokumentu, możliwe wartości to: 0 - od netto, 1 - od brutto, 2 - sumy
+        public int SposobWyliczaniaDokumentu
+        {
+            get => sposobwyliczaniadokumentu;
+            set => SetPropertyValue(nameof(SposobWyliczaniaDokumentu), ref sposobwyliczaniadokumentu, value);
+        }
+        DateTime datasprzedazy;
+        //Data sprzedaży
         public DateTime DataSprzedazy
         {
-            get => dataSprzedazy;
-            set => SetPropertyValue(nameof(DataSprzedazy), ref dataSprzedazy, value);
+            get => datasprzedazy;
+            set => SetPropertyValue(nameof(DataSprzedazy), ref datasprzedazy, value);
         }
-        //DATA_SPRZEDAZY,Date,0,Data sprzedaży,Nie
-        //ID_SPOSOBU_PLATNOSCI,Integer,0,Identyfikator sposobu zapłaty za fakturę z sekcji SPOSOBY_ZAPLATY,Tak
-        //SPOSOB_PLATNOSCI,String,100,"Sposób zapłaty za fakturę, używane do wyszukiwania, jeśli odnalezienie po ID_SPOSOBU_PLATNOSCI nie powiedzie się",Tak
-
-        public RaksSposobPlatnosci SposobPlatnosci
+        int idsposobuplatnosci;
+        //Identyfikator sposobu zapłaty za fakturę z sekcji SPOSOBY_ZAPLATY
+        public int IdSposobuPlatnosci
         {
-            get => sposobPlatnosci;
-            set => SetPropertyValue(nameof(SposobPlatnosci), ref sposobPlatnosci, value);
+            get => idsposobuplatnosci;
+            set => SetPropertyValue(nameof(IdSposobuPlatnosci), ref idsposobuplatnosci, value);
         }
-
-
+        string sposobplatnosci;
+        //Sposób zapłaty za fakturę, używane do wyszukiwania, jeśli odnalezienie po ID_SPOSOBU_PLATNOSCI nie powiedzie się
+        [Size(100)]
+        public string SposobPlatnosci
+        {
+            get => sposobplatnosci;
+            set => SetPropertyValue(nameof(SposobPlatnosci), ref sposobplatnosci, value);
+        }
+        DateTime dataplatnosci;
+        //Data płatności za fakturę
         public DateTime DataPlatnosci
         {
-            get => dataPlatnosci;
-            set => SetPropertyValue(nameof(DataPlatnosci), ref dataPlatnosci, value);
+            get => dataplatnosci;
+            set => SetPropertyValue(nameof(DataPlatnosci), ref dataplatnosci, value);
         }
-        //DATA_PLATNOSCI,Date,0,Data płatności za fakturę,Tak
-        //WARTOSC_NETTO_SPRZEDAZY,Float,0,Wartość dokumentu w cenach sprzedaży netto (w walucie dokumentu) (w jednostkach kontrahenta),Tak
-
-        public decimal WartoscNettoSprzdazy
+        decimal wartoscnettosprzedazy;
+        //Wartość dokumentu w cenach sprzedaży netto (w walucie dokumentu) (w jednostkach kontrahenta)
+        public decimal WartoscNettoSprzedazy
         {
-            get => wartoscNettoSprzdazy;
-            set => SetPropertyValue(nameof(WartoscNettoSprzdazy), ref wartoscNettoSprzdazy, value);
+            get => wartoscnettosprzedazy;
+            set => SetPropertyValue(nameof(WartoscNettoSprzedazy), ref wartoscnettosprzedazy, value);
         }
-        //KWOTA_VAT_SPRZEDAZY,Float,0,Kwota VAT podatku należnego (w jednostkach kontrahenta),Tak
-
+        decimal kwotavatsprzedazy;
+        //Kwota VAT podatku należnego (w jednostkach kontrahenta)
         public decimal KwotaVatSprzedazy
         {
-            get => kwotaVatSprzedazy;
-            set => SetPropertyValue(nameof(KwotaVatSprzedazy), ref kwotaVatSprzedazy, value);
+            get => kwotavatsprzedazy;
+            set => SetPropertyValue(nameof(KwotaVatSprzedazy), ref kwotavatsprzedazy, value);
         }
-        //WARTOSC_BRUTTO_SPRZEDAZY,Float,0,Wartość dokumentu w cenach  brutto (w walucie dokumentu) (w jednostkach kontrahenta),Tak
-
+        decimal wartoscbruttosprzedazy;
+        //Wartość dokumentu w cenach  brutto (w walucie dokumentu) (w jednostkach kontrahenta)
         public decimal WartoscBruttoSprzedazy
         {
-            get => wartoscBruttoSprzedazy;
-            set => SetPropertyValue(nameof(WartoscBruttoSprzedazy), ref wartoscBruttoSprzedazy, value);
+            get => wartoscbruttosprzedazy;
+            set => SetPropertyValue(nameof(WartoscBruttoSprzedazy), ref wartoscbruttosprzedazy, value);
         }
-
+        decimal wartoscnettozlotowkowa;
+        //Wartość dokumentu w cenach netto w złotówkach (w jednostkach kontrahenta)
         public decimal WartoscNettoZlotowkowa
         {
-            get => wartoscNettoZlotowkowa;
-            set => SetPropertyValue(nameof(WartoscNettoZlotowkowa), ref wartoscNettoZlotowkowa, value);
+            get => wartoscnettozlotowkowa;
+            set => SetPropertyValue(nameof(WartoscNettoZlotowkowa), ref wartoscnettozlotowkowa, value);
         }
-        //WARTOSC_NETTO_ZLOTOWKOWA,Float,0,Wartość dokumentu w cenach netto w złotówkach (w jednostkach kontrahenta),Tak
-
-        public decimal WartoscVatZlotowkowa
-        {
-            get => wartoscVatZlotowkowa;
-            set => SetPropertyValue(nameof(WartoscVatZlotowkowa), ref wartoscVatZlotowkowa, value);
-        }
-        //KWOTA_VAT_ZLOTOWKOWA,Float,0,Wartość podatku należnego w złotówkach (w jednostkach kontrahenta),Tak
-
+        decimal kwotavatzlotowkowa;
+        //Wartość podatku należnego w złotówkach (w jednostkach kontrahenta)
         public decimal KwotaVatZlotowkowa
         {
-            get => kwotaVatZlotowkowa;
-            set => SetPropertyValue(nameof(KwotaVatZlotowkowa), ref kwotaVatZlotowkowa, value);
+            get => kwotavatzlotowkowa;
+            set => SetPropertyValue(nameof(KwotaVatZlotowkowa), ref kwotavatzlotowkowa, value);
         }
-        //WARTOSC_BRUTTO_ZLOTOWKOWA,Float,0,Wartość dokumentu w cenach brutto w złotówkach (w jednostkach kontrahenta),Tak
-
+        decimal wartoscbruttozlotowkowa;
+        //Wartość dokumentu w cenach brutto w złotówkach (w jednostkach kontrahenta)
         public decimal WartoscBruttoZlotowkowa
         {
-            get => wartoscBruttoZlotowkowa;
-            set => SetPropertyValue(nameof(WartoscBruttoZlotowkowa), ref wartoscBruttoZlotowkowa, value);
+            get => wartoscbruttozlotowkowa;
+            set => SetPropertyValue(nameof(WartoscBruttoZlotowkowa), ref wartoscbruttozlotowkowa, value);
         }
-        //WARTOSC_SPRZEDAZY_OPK_KAUCJONOWNYCH,Float,0,Wartość opakowań kaucjonowanych w cenach sprzedaży (w walucie dokumentu) (w jednostkach kontrahenta),Tak
-
-        public decimal WartoscSprzedazyOpkKaucjonowanych
+        decimal wartoscsprzedazyopkkaucjonownych;
+        //Wartość opakowań kaucjonowanych w cenach sprzedaży (w walucie dokumentu) (w jednostkach kontrahenta)
+        public decimal WartoscSprzedazyOpkKaucjonownych
         {
-            get => wartoscSprzedazyOpkKaucjonowanych;
-            set => SetPropertyValue(nameof(WartoscSprzedazyOpkKaucjonowanych), ref wartoscSprzedazyOpkKaucjonowanych, value);
+            get => wartoscsprzedazyopkkaucjonownych;
+            set => SetPropertyValue(nameof(WartoscSprzedazyOpkKaucjonownych), ref wartoscsprzedazyopkkaucjonownych, value);
         }
-        //WARTOSC_ZLOTOWKOWA_OPK_KAUCJONOWNYCH,Float,0,Wartość opakowań kaucjonowanych w cenach sprzedaży (w złotówkach) (w jednostkach kontrahenta),Tak
-
-        public decimal WartoscZlotowkowaOpkKaucjonowanych
+        decimal wartosczlotowkowaopkkaucjonownych;
+        //Wartość opakowań kaucjonowanych w cenach sprzedaży (w złotówkach) (w jednostkach kontrahenta)
+        public decimal WartoscZlotowkowaOpkKaucjonownych
         {
-            get => wartoscZlotowkowaOpkKaucjonowanych;
-            set => SetPropertyValue(nameof(WartoscZlotowkowaOpkKaucjonowanych), ref wartoscZlotowkowaOpkKaucjonowanych, value);
+            get => wartosczlotowkowaopkkaucjonownych;
+            set => SetPropertyValue(nameof(WartoscZlotowkowaOpkKaucjonownych), ref wartosczlotowkowaopkkaucjonownych, value);
         }
-
-
-        //UWAGI,String,8000,Uwagi do dokumentu (maks. 8000 znaków),Nie
-
-        [Size(SizeAttribute.DefaultStringMappingFieldSize)]
+        string uwagi;
+        //Uwagi do dokumentu (maks. 8000 znaków)
+        [Size(8000)]
         public string Uwagi
         {
             get => uwagi;
             set => SetPropertyValue(nameof(Uwagi), ref uwagi, value);
         }
-        //WYSTAWIL,String,15,"Identyfikator osoby, która wystawiła dokument",Nie
-
-        [Size(SizeAttribute.DefaultStringMappingFieldSize)]
+        string wystawil;
+        //Identyfikator osoby, która wystawiła dokument
+        [Size(15)]
         public string Wystawil
         {
             get => wystawil;
             set => SetPropertyValue(nameof(Wystawil), ref wystawil, value);
         }
-        //DATA_DOPISANIA,DateTime,0,Data wystawienia dokumentu w systemie (może się różnić od DATA_WYSTAWIENIA),Nie
-
-        public DateTime DataPodpisania
+        string datadopisania;
+        //Data wystawienia dokumentu w systemie (może się różnić od DATA_WYSTAWIENIA)
+        public string DataDopisania
         {
-            get => dataPodpisania;
-            set => SetPropertyValue(nameof(DataPodpisania), ref dataPodpisania, value);
+            get => datadopisania;
+            set => SetPropertyValue(nameof(DataDopisania), ref datadopisania, value);
         }
-        //ZMIENIL,String,15,"Identyfikator osoby, która ostatnio zmodyfikowała dokument",Nie
-
-        [Size(SizeAttribute.DefaultStringMappingFieldSize)]
+        string zmienil;
+        //Identyfikator osoby, która ostatnio zmodyfikowała dokument
+        [Size(15)]
         public string Zmienil
         {
             get => zmienil;
             set => SetPropertyValue(nameof(Zmienil), ref zmienil, value);
         }
-        //DATA_ZMIANY,DateTime,0,Data ostatniej modyfikacji dokumentu,Nie
-
-        public DateTime DataZmiany
+        string datazmiany;
+        //Data ostatniej modyfikacji dokumentu
+        public string DataZmiany
         {
-            get => dataZmiany;
-            set => SetPropertyValue(nameof(DataZmiany), ref dataZmiany, value);
+            get => datazmiany;
+            set => SetPropertyValue(nameof(DataZmiany), ref datazmiany, value);
         }
-        //ID_KRAJU_PRZEZNACZENIA,Integer,0,Identyfikator kraju przeznaczenia,Nie
-
-        //KOD_KRAJU_PRZEZNACZENIA,String,2,Kod kraju przeznaczenia,Nie
-
-        [Size(SizeAttribute.DefaultStringMappingFieldSize)]
+        int idkrajuprzeznaczenia;
+        //Identyfikator kraju przeznaczenia
+        public int IdKrajuPrzeznaczenia
+        {
+            get => idkrajuprzeznaczenia;
+            set => SetPropertyValue(nameof(IdKrajuPrzeznaczenia), ref idkrajuprzeznaczenia, value);
+        }
+        string kodkrajuprzeznaczenia;
+        //Kod kraju przeznaczenia
+        [Size(2)]
         public string KodKrajuPrzeznaczenia
         {
-            get => kodKrajuPrzeznaczenia;
-            set => SetPropertyValue(nameof(KodKrajuPrzeznaczenia), ref kodKrajuPrzeznaczenia, value);
+            get => kodkrajuprzeznaczenia;
+            set => SetPropertyValue(nameof(KodKrajuPrzeznaczenia), ref kodkrajuprzeznaczenia, value);
         }
-        //ID_WARUNKU_DOSTAWY,Integer,0,Identyfikator warunku dostawy,Nie
-        //KOD_WARUNKU_DOSTAWY,String,5,Kod warunków dostawy,Nie
-        //ID_RODZAJU_TRANSPORTU,Integer,0,Identyfikator rodzaju transportu,Nie
-        //KOD_RODZAJU_TRANSPORTU,String,5,Kod rodzaju transportu,Nie
-        //ID_RODZAJU_TRANSAKCJI,Integer,0,Identyfikator rodzaju transakcji,Nie
-        //KOD_RODZAJU_TRANSAKCJI,String,5,Kod rodzaju transakcji,Nie
-        //ANALITYKA_FK_GRUP_MAG,String,20,Numer analityki konta FK grup magazynowych,Nie
-        //ID_RDS,Integer,0,Identyfikator raportu dobowego sprzedaży z sekcji RAPORTY_DOBOWE_SPRZEDAZY.,Nie
-        //GLN_NABYWCY,String,13,Globalny numer lokalizacji (GLN) nabywcy,Nie
-        //GLN_ODBIORCY,String,13,Globalny numer lokalizacji (GLN) odbiorcy,Nie
-        //PODSTAWA_ZWOLNIENIA_Z_VAT,String,250,Podstawa prawna zwolnienia z podatku VAT,Nie
-        //MECHANIZM_PODZIELONEJ_PLATNOSCI,Integer,0,Mechanizm podzielonej płatności,Nie
-
-        
-        public bool MechanizmPodzielonejPlatnosci
+        int idwarunkudostawy;
+        //Identyfikator warunku dostawy
+        public int IdWarunkuDostawy
         {
-            get => mechanizmPodzielonejPlatnosci;
-            set => SetPropertyValue(nameof(MechanizmPodzielonejPlatnosci), ref mechanizmPodzielonejPlatnosci, value);
+            get => idwarunkudostawy;
+            set => SetPropertyValue(nameof(IdWarunkuDostawy), ref idwarunkudostawy, value);
         }
-        //PROCEDURY_VAT,String,100,Procedury VAT powiązane z dokumentem,Nie
-        //NUMER_FS_DO_PA,String,255,Numer faktury do paragonu,Nie
-        //DATA_FS_DO_PA,Date,0,Data wystawienia faktury do paragonu,Nie
-        //NIP_KOD_KRAJU_PLATNIKA,String,2,Kod kraju płatnika,Nie
+        string kodwarunkudostawy;
+        //Kod warunków dostawy
+        [Size(5)]
+        public string KodWarunkuDostawy
+        {
+            get => kodwarunkudostawy;
+            set => SetPropertyValue(nameof(KodWarunkuDostawy), ref kodwarunkudostawy, value);
+        }
+        int idrodzajutransportu;
+        //Identyfikator rodzaju transportu
+        public int IdRodzajuTransportu
+        {
+            get => idrodzajutransportu;
+            set => SetPropertyValue(nameof(IdRodzajuTransportu), ref idrodzajutransportu, value);
+        }
+        string kodrodzajutransportu;
+        //Kod rodzaju transportu
+        [Size(5)]
+        public string KodRodzajuTransportu
+        {
+            get => kodrodzajutransportu;
+            set => SetPropertyValue(nameof(KodRodzajuTransportu), ref kodrodzajutransportu, value);
+        }
+        int idrodzajutransakcji;
+        //Identyfikator rodzaju transakcji
+        public int IdRodzajuTransakcji
+        {
+            get => idrodzajutransakcji;
+            set => SetPropertyValue(nameof(IdRodzajuTransakcji), ref idrodzajutransakcji, value);
+        }
+        string kodrodzajutransakcji;
+        //Kod rodzaju transakcji
+        [Size(5)]
+        public string KodRodzajuTransakcji
+        {
+            get => kodrodzajutransakcji;
+            set => SetPropertyValue(nameof(KodRodzajuTransakcji), ref kodrodzajutransakcji, value);
+        }
+        string analitykafkgrupmag;
+        //Numer analityki konta FK grup magazynowych
+        [Size(20)]
+        public string AnalitykaFkGrupMag
+        {
+            get => analitykafkgrupmag;
+            set => SetPropertyValue(nameof(AnalitykaFkGrupMag), ref analitykafkgrupmag, value);
+        }
+        int idrds;
+        //Identyfikator raportu dobowego sprzedaży z sekcji RAPORTY_DOBOWE_SPRZEDAZY.
+        public int IdRds
+        {
+            get => idrds;
+            set => SetPropertyValue(nameof(IdRds), ref idrds, value);
+        }
+        string glnnabywcy;
+        //Globalny numer lokalizacji (GLN) nabywcy
+        [Size(13)]
+        public string GlnNabywcy
+        {
+            get => glnnabywcy;
+            set => SetPropertyValue(nameof(GlnNabywcy), ref glnnabywcy, value);
+        }
+        string glnodbiorcy;
+        //Globalny numer lokalizacji (GLN) odbiorcy
+        [Size(13)]
+        public string GlnOdbiorcy
+        {
+            get => glnodbiorcy;
+            set => SetPropertyValue(nameof(GlnOdbiorcy), ref glnodbiorcy, value);
+        }
+        string podstawazwolnieniazvat;
+        //Podstawa prawna zwolnienia z podatku VAT
+        [Size(250)]
+        public string PodstawaZwolnieniaZVat
+        {
+            get => podstawazwolnieniazvat;
+            set => SetPropertyValue(nameof(PodstawaZwolnieniaZVat), ref podstawazwolnieniazvat, value);
+        }
+        int mechanizmpodzielonejplatnosci;
+        //Mechanizm podzielonej płatności
+        public int MechanizmPodzielonejPlatnosci
+        {
+            get => mechanizmpodzielonejplatnosci;
+            set => SetPropertyValue(nameof(MechanizmPodzielonejPlatnosci), ref mechanizmpodzielonejplatnosci, value);
+        }
+        string proceduryvat;
+        //Procedury VAT powiązane z dokumentem
+        [Size(100)]
+        public string ProceduryVat
+        {
+            get => proceduryvat;
+            set => SetPropertyValue(nameof(ProceduryVat), ref proceduryvat, value);
+        }
+        string numerfsdopa;
+        //Numer faktury do paragonu
+        [Size(255)]
+        public string NumerFsDoPa
+        {
+            get => numerfsdopa;
+            set => SetPropertyValue(nameof(NumerFsDoPa), ref numerfsdopa, value);
+        }
+        DateTime datafsdopa;
+        //Data wystawienia faktury do paragonu
+        public DateTime DataFsDoPa
+        {
+            get => datafsdopa;
+            set => SetPropertyValue(nameof(DataFsDoPa), ref datafsdopa, value);
+        }
+        string nipkodkrajuplatnika;
+        //Kod kraju płatnika
+        [Size(2)]
+        public string NipKodKrajuPlatnika
+        {
+            get => nipkodkrajuplatnika;
+            set => SetPropertyValue(nameof(NipKodKrajuPlatnika), ref nipkodkrajuplatnika, value);
+        }
 
         [Association("RaksFaktura-Rozrachunki")]
         public XPCollection<RaksRozrachunek> Rozrachunki{

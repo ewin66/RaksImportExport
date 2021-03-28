@@ -578,7 +578,7 @@ namespace Receptury.Module
 
                 if (artykul.Vat == null)
                 {
-                    StawkaVat rec = FindStawkaVat(artykul.IdStawki,artykul.StawkaVat, artykul.TypStawki);
+                    RaksStawkaVat rec = FindStawkaVat(artykul.IdStawki,artykul.StawkaVat, artykul.TypStawki);
                     artykul.Vat = rec;
                 }
 
@@ -859,15 +859,15 @@ namespace Receptury.Module
 
         }
 
-        private StawkaVat FindStawkaVat(int id,decimal stawka, int typ)
+        private RaksStawkaVat FindStawkaVat(int id,decimal stawka, int typ)
         {
-            var rec = objectSpace.FindObject<StawkaVat>(new BinaryOperator(nameof(StawkaVat.Id), id));
+            var rec = objectSpace.FindObject<RaksStawkaVat>(new BinaryOperator(nameof(RaksStawkaVat.Id), id));
             if (rec == null)
             {
-                rec = objectSpace.CreateObject<StawkaVat>();
+                rec = objectSpace.CreateObject<RaksStawkaVat>();
                 rec.Id = id;
-                rec.Wartosc = stawka;
-                rec.TypStawki = typ;
+                rec.WartoscProcentowa = stawka;
+                rec.TypStawkiVat = typ;
             }
 
             return rec;

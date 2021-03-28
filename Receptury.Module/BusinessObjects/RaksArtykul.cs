@@ -20,12 +20,12 @@ namespace Receptury.Module.BusinessObjects
         RaksKontakt dostawca;
         RaksKontakt producent;
         string uwagi;
-        StawkaVat vat;
+        RaksStawkaVat vat;
         RaksJednostkaMiary jednostka;
         string nazwaProducenta;
         string nipProducenta;
         int idProducenta;
-        string kodKreskowy;
+    
         string nazwaDostawcy;
         string nipDostawcy;
         int idDostawcy;
@@ -105,7 +105,7 @@ namespace Receptury.Module.BusinessObjects
         }
 
 
-        public StawkaVat Vat
+        public RaksStawkaVat Vat
         {
             get => vat;
             set => SetPropertyValue(nameof(Vat), ref vat, value);
@@ -219,12 +219,7 @@ namespace Receptury.Module.BusinessObjects
             set => SetPropertyValue(nameof(NazwaDostawcy), ref nazwaDostawcy, value);
         }
 
-        [Size(SizeAttribute.DefaultStringMappingFieldSize)]
-        public string KodKreskowy
-        {
-            get => kodKreskowy;
-            set => SetPropertyValue(nameof(KodKreskowy), ref kodKreskowy, value);
-        }
+
 
 
         public RaksKontakt Dostawca
@@ -269,5 +264,193 @@ namespace Receptury.Module.BusinessObjects
             set => SetPropertyValue(nameof(Uwagi), ref uwagi, value);
         }
 
+
+        int iddomyslnegorabatu;
+        //Identyfikator domyślnego rodzaju rabatu z sekcji RODZAJE_RABATOW
+        public int IdDomyslnegoRabatu
+        {
+            get => iddomyslnegorabatu;
+            set => SetPropertyValue(nameof(IdDomyslnegoRabatu), ref iddomyslnegorabatu, value);
+        }
+        string nazwadomyslnegorabatu;
+        //Nazwa domyślnego rodzaju rabatu
+        [Size(50)]
+        public string NazwaDomyslnegoRabatu
+        {
+            get => nazwadomyslnegorabatu;
+            set => SetPropertyValue(nameof(NazwaDomyslnegoRabatu), ref nazwadomyslnegorabatu, value);
+        }
+        bool ostrzegajosprzponizejcenyzakupu;
+        //Czy program ma generować ostrzeżenia, jeśli nastąpiła sprzedaż tego artykułu z ceną niższą niż cena zakupu
+        public bool OstrzegajOSprzPonizejCenyZakupu
+        {
+            get => ostrzegajosprzponizejcenyzakupu;
+            set => SetPropertyValue(nameof(OstrzegajOSprzPonizejCenyZakupu), ref ostrzegajosprzponizejcenyzakupu, value);
+        }
+        string waganetto;
+        //Waga netto artykułu
+        public string WagaNetto
+        {
+            get => waganetto;
+            set => SetPropertyValue(nameof(WagaNetto), ref waganetto, value);
+        }
+        string wagabrutto;
+        //Waga brutto artykułu
+        public string WagaBrutto
+        {
+            get => wagabrutto;
+            set => SetPropertyValue(nameof(WagaBrutto), ref wagabrutto, value);
+        }
+
+        decimal prowizjaakwizytora;
+        //Procentowa prowizja od sprzedaży dla akwizytora, ważniejsza od prowizji zdefiniowanej w główce dokumentu
+        public decimal ProwizjaAkwizytora
+        {
+            get => prowizjaakwizytora;
+            set => SetPropertyValue(nameof(ProwizjaAkwizytora), ref prowizjaakwizytora, value);
+        }
+        int dniprzydatnosci;
+        //Termin przydatności artykułu w dniach
+        public int DniPrzydatnosci
+        {
+            get => dniprzydatnosci;
+            set => SetPropertyValue(nameof(DniPrzydatnosci), ref dniprzydatnosci, value);
+        }
+        string stanminimalny;
+        //Jeśli w magazynie będzie mniej jednostek artykułu niż podana tu wartość, program będzie generował ostrzeżenia; 0 - pole ignorowane, brak ostrzeżeń
+        public string StanMinimalny
+        {
+            get => stanminimalny;
+            set => SetPropertyValue(nameof(StanMinimalny), ref stanminimalny, value);
+        }
+        string stanmaksymalny;
+        //Jeśli w magazynie będzie więcej jednostek artykułu niż podana tu wartość, program będzie generował ostrzeżenia; 0 - pole ignorowane, brak ostrzeżeń
+        public string StanMaksymalny
+        {
+            get => stanmaksymalny;
+            set => SetPropertyValue(nameof(StanMaksymalny), ref stanmaksymalny, value);
+        }
+
+
+        string kodcn;
+        //Kod CN
+        [Size(20)]
+        public string KodCn
+        {
+            get => kodcn;
+            set => SetPropertyValue(nameof(KodCn), ref kodcn, value);
+        }
+        string kodcnnazwa;
+        //Nazwa kodu CN
+        [Size(250)]
+        public string KodCnNazwa
+        {
+            get => kodcnnazwa;
+            set => SetPropertyValue(nameof(KodCnNazwa), ref kodcnnazwa, value);
+        }
+        int jmcn;
+        //Jednostka miary według CN
+        public int JmCn
+        {
+            get => jmcn;
+            set => SetPropertyValue(nameof(JmCn), ref jmcn, value);
+        }
+        string skrotjednostkimiarycn;
+        //
+        [Size(5)]
+        public string SkrotJednostkiMiaryCn
+        {
+            get => skrotjednostkimiarycn;
+            set => SetPropertyValue(nameof(SkrotJednostkiMiaryCn), ref skrotjednostkimiarycn, value);
+        }
+        string nazwajednostkimiarycn;
+        //
+        [Size(25)]
+        public string NazwaJednostkiMiaryCn
+        {
+            get => nazwajednostkimiarycn;
+            set => SetPropertyValue(nameof(NazwaJednostkiMiaryCn), ref nazwajednostkimiarycn, value);
+        }
+        decimal przelicznikcn;
+        //Przelicznik jednostki miary CN
+        public decimal PrzelicznikCn
+        {
+            get => przelicznikcn;
+            set => SetPropertyValue(nameof(PrzelicznikCn), ref przelicznikcn, value);
+        }
+        bool bezmasy;
+        //Dla tego towaru nie podaje się masy na deklaracji Intrastat
+        public bool BezMasy
+        {
+            get => bezmasy;
+            set => SetPropertyValue(nameof(BezMasy), ref bezmasy, value);
+        }
+        bool intrastat;
+        //Towar jest uwzględniany na deklaracji Intrastat
+        public bool Intrastat
+        {
+            get => intrastat;
+            set => SetPropertyValue(nameof(Intrastat), ref intrastat, value);
+        }
+        string pcn;
+        //Kod PCN artykułu
+        [Size(15)]
+        public string Pcn
+        {
+            get => pcn;
+            set => SetPropertyValue(nameof(Pcn), ref pcn, value);
+        }
+        string kodkreskowy;
+        //Kod kreskowy artykułu (jeśli nie zdefiniowano jego cech, w przeciwnym wypadku nieużywane)
+        [Size(30)]
+        public string KodKreskowy
+        {
+            get => kodkreskowy;
+            set => SetPropertyValue(nameof(KodKreskowy), ref kodkreskowy, value);
+        }
+        string maskakodukreskowego;
+        //Maska dla generowania kodu kreskowego, jeśli artykuł ma zdefiniowane cechy
+        [Size(30)]
+        public string MaskaKoduKreskowego
+        {
+            get => maskakodukreskowego;
+            set => SetPropertyValue(nameof(MaskaKoduKreskowego), ref maskakodukreskowego, value);
+        }
+        decimal miniloscpsp;
+        //Najmniejsza ilość możliwa do zmontowania na PSP
+        public decimal MinIloscPsp
+        {
+            get => miniloscpsp;
+            set => SetPropertyValue(nameof(MinIloscPsp), ref miniloscpsp, value);
+        }
+        decimal minilosczd;
+        //Najmniejsza ilość możliwa do zamówienia u dostawcy (ZD i ZDwew)
+        public decimal MinIloscZd
+        {
+            get => minilosczd;
+            set => SetPropertyValue(nameof(MinIloscZd), ref minilosczd, value);
+        }
+        decimal minilosczo;
+        //Najmniejsza ilość możliwa do zamówienia przez odbiorcę (ZO)
+        public decimal MinIloscZo
+        {
+            get => minilosczo;
+            set => SetPropertyValue(nameof(MinIloscZo), ref minilosczo, value);
+        }
+        decimal miniloscpr;
+        //Najmniejsza ilość możliwa do wyprodukowania w produkcji (ZP)
+        public decimal MinIloscPr
+        {
+            get => miniloscpr;
+            set => SetPropertyValue(nameof(MinIloscPr), ref miniloscpr, value);
+        }
+        string funduszpromocji;
+        //Nazwa funduszu promocji używanego do naliczania potrąceń przy zakupach od rolników ryczałtowych.
+        [Size(60)]
+        public string FunduszPromocji
+        {
+            get => funduszpromocji;
+            set => SetPropertyValue(nameof(FunduszPromocji), ref funduszpromocji, value);
+        }
     }
 }
