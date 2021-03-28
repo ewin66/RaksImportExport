@@ -9,16 +9,18 @@ using System.Threading.Tasks;
 namespace Receptury.Module.BusinessObjects
 {
     [DefaultClassOptions]
-    public class RaksMagazyn : XPCustomObject
+    public class RaksMagazyn : XPObject
     {
         public RaksMagazyn(Session session) : base(session)
         { }
 
 
+        string analityka;
+        string numer;
         string uwagi;
         string nazwa;
         int id;
-        [Key(false)]
+   
         public int Id
         {
             get => id;
@@ -33,7 +35,20 @@ namespace Receptury.Module.BusinessObjects
             set => SetPropertyValue(nameof(Nazwa), ref nazwa, value);
         }
 
+
+        public string Numer
+        {
+            get => numer;
+            set => SetPropertyValue(nameof(Numer), ref numer, value);
+        }
         
+        [Size(SizeAttribute.DefaultStringMappingFieldSize)]
+        public string Analityka
+        {
+            get => analityka;
+            set => SetPropertyValue(nameof(Analityka), ref analityka, value);
+        }
+
         [Size(SizeAttribute.DefaultStringMappingFieldSize)]
         public string Uwagi
         {

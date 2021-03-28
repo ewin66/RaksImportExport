@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Receptury.Module.BusinessObjects
 {
-    public class RaksPozycjeFaktury : XPCustomObject
+    public class RaksPozycjeFaktury : XPObject
     {
         public RaksPozycjeFaktury(Session session) : base(session)
         { }
 
         int id;
         //Identyfikator rekordu
-        [Key(false)]
+     
         public int Id
         {
             get => id;

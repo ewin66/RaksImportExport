@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Receptury.Module.BusinessObjects
 {
     [DefaultClassOptions]
-    public class RaksStawkaVat : XPCustomObject
+    public class RaksStawkaVat : XPObject
     {
         public RaksStawkaVat(Session session) : base(session)
         { }
@@ -18,7 +18,7 @@ namespace Receptury.Module.BusinessObjects
         /// <summary>
         /// Identyfikator stawki VAT, wartości 1 do 200 są zarezerwowane dla stawek standardowych
         /// <summary>
-        [Key(false)]
+ 
         public int Id
         {
             get => id;

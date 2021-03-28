@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Receptury.Module.BusinessObjects
 {
-    public class RaksRozrachunek : XPCustomObject
+    public class RaksRozrachunek : XPObject
     {
         public RaksRozrachunek(Session session) : base(session)
         { }
 
         int id;
         //Unikalny identyfikator rozrachunku
-        [Key(false)]
+   
         public int Id
         {
             get => id;

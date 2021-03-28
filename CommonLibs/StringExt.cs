@@ -125,6 +125,17 @@ namespace CommonLibs
             }
         }
 
+        public static bool ToBool(this string text)
+        {
+            try
+            {
+                return bool.Parse(text);
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         public static int ToInt(this string text)
         {

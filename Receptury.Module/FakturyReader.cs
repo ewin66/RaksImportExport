@@ -1,4 +1,5 @@
-﻿using DevExpress.Data.Filtering;
+﻿using CommonLibs;
+using DevExpress.Data.Filtering;
 using DevExpress.ExpressApp;
 using Receptury.Module.BusinessObjects;
 using System;
@@ -647,160 +648,191 @@ namespace Receptury.Module
             string WIERSZ_KOD_WALUTY;
 
             string WIERSZ_ID = xml.ChilkatPath("WIERSZ|(ID)");
+
+            RaksFaktura faktura = FindFaktura(WIERSZ_ID);
+
             string WIERSZ_ID_MAGAZYNU = xml.ChilkatPath("WIERSZ|(ID_MAGAZYNU)");
             string WIERSZ_NUMER_MAGAZYNU = xml.ChilkatPath("WIERSZ|(NUMER_MAGAZYNU)");
             string WIERSZ_NAZWA_MAGAZYNU = xml.ChilkatPath("WIERSZ|(NAZWA_MAGAZYNU)");
             string WIERSZ_ANALITYKA_FK_MAGAZYNU = xml.ChilkatPath("WIERSZ|(ANALITYKA_FK_MAGAZYNU)");
 
+            var magazyn = FindMagazyn(WIERSZ_ID_MAGAZYNU, WIERSZ_NUMER_MAGAZYNU, WIERSZ_NAZWA_MAGAZYNU, WIERSZ_ANALITYKA_FK_MAGAZYNU);
+            faktura.Magazyn = magazyn;
             string WIERSZ_ID_SPRZEDAWCY = xml.ChilkatPath("WIERSZ|(ID_SPRZEDAWCY)");
             string WIERSZ_NAZWA_SKROCONA_SPRZEDAWCY = xml.ChilkatPath("WIERSZ|(NAZWA_SKROCONA_SPRZEDAWCY)");
             string WIERSZ_NAZWA_PELNA_SPRZEDAWCY = xml.ChilkatPath("WIERSZ|(NAZWA_PELNA_SPRZEDAWCY)");
             string WIERSZ_NIP_SPRZEDAWCY = xml.ChilkatPath("WIERSZ|(NIP_SPRZEDAWCY)");
             string WIERSZ_KOD_KRESKOWY_SPRZEDAWCY = xml.ChilkatPath("WIERSZ|(KOD_KRESKOWY_SPRZEDAWCY)");
 
-            string WIERSZ_RODZAJ_DOK_SPRZEDAZY = xml.ChilkatPath("WIERSZ|(RODZAJ_DOK_SPRZEDAZY)");
-            string WIERSZ_KOD_DOKUMENTU = xml.ChilkatPath("WIERSZ|(KOD_DOKUMENTU)");
-            string WIERSZ_DATA_WYSTAWIENIA = xml.ChilkatPath("WIERSZ|(DATA_WYSTAWIENIA)");
-            string WIERSZ_NUMER_DOKUMENTU = xml.ChilkatPath("WIERSZ|(NUMER_DOKUMENTU)");
-            string WIERSZ_NAZWA_DOKUMENTU = xml.ChilkatPath("WIERSZ|(NAZWA_DOKUMENTU)");
-            string WIERSZ_TRANSAKCJA_TROJSTRONNA = xml.ChilkatPath("WIERSZ|(TRANSAKCJA_TROJSTRONNA)");
-            string WIERSZ_SYGNATURA = xml.ChilkatPath("WIERSZ|(SYGNATURA)");
-            string WIERSZ_ZNACZNIKI = xml.ChilkatPath("WIERSZ|(ZNACZNIKI)");
-            string WIERSZ_ANALITYKA_FK = xml.ChilkatPath("WIERSZ|(ANALITYKA_FK)");
-            string WIERSZ_BLOKADA = xml.ChilkatPath("WIERSZ|(BLOKADA)");
-            string WIERSZ_ZAFISKALIZOWANY = xml.ChilkatPath("WIERSZ|(ZAFISKALIZOWANY)");
+            var sprzedawca = FindKontakt(WIERSZ_ID_SPRZEDAWCY, WIERSZ_NAZWA_SKROCONA_SPRZEDAWCY, WIERSZ_NAZWA_PELNA_SPRZEDAWCY, WIERSZ_NIP_SPRZEDAWCY, WIERSZ_KOD_KRESKOWY_SPRZEDAWCY);
+            faktura.Sprzedawca = sprzedawca;
+            faktura.RodzajDokSprzedazy = xml.ChilkatPath("WIERSZ|(RODZAJ_DOK_SPRZEDAZY)");
+            faktura.KodDokumentu = xml.ChilkatPath("WIERSZ|(KOD_DOKUMENTU)");
+            faktura.DataWystawienia = xml.ChilkatPath("WIERSZ|(DATA_WYSTAWIENIA)").ToDate();
+            faktura.NumerDokumentu = xml.ChilkatPath("WIERSZ|(NUMER_DOKUMENTU)");
+            faktura.NazwaDokumentu = xml.ChilkatPath("WIERSZ|(NAZWA_DOKUMENTU)");
+            faktura.TransakcjaTrojstronna = xml.ChilkatPath("WIERSZ|(TRANSAKCJA_TROJSTRONNA)").ToBool();
+            faktura.Sygnatura = xml.ChilkatPath("WIERSZ|(SYGNATURA)");
+            faktura.Znaczniki = xml.ChilkatPath("WIERSZ|(ZNACZNIKI)");
+            faktura.AnalitykaFk = xml.ChilkatPath("WIERSZ|(ANALITYKA_FK)");
+            faktura.Blokada = xml.ChilkatPath("WIERSZ|(BLOKADA)").ToInt();
+            faktura.Zafiskalizowany = xml.ChilkatPath("WIERSZ|(ZAFISKALIZOWANY)").ToBool();
 
             string WIERSZ_ID_NABYWCY = xml.ChilkatPath("WIERSZ|(ID_NABYWCY)");
             string WIERSZ_NAZWA_SKROCONA_NABYWCY = xml.ChilkatPath("WIERSZ|(NAZWA_SKROCONA_NABYWCY)");
             string WIERSZ_NAZWA_PELNA_NABYWCY = xml.ChilkatPath("WIERSZ|(NAZWA_PELNA_NABYWCY)");
             string WIERSZ_KOD_KRESKOWY_NABYWCY = xml.ChilkatPath("WIERSZ|(KOD_KRESKOWY_NABYWCY)");
             string WIERSZ_NIP_NABYWCY = xml.ChilkatPath("WIERSZ|(NIP_NABYWCY)");
-            string WIERSZ_ULICA_NABYWCY = xml.ChilkatPath("WIERSZ|(ULICA_NABYWCY)");
-            string WIERSZ_NR_DOMU_NABYWCY = xml.ChilkatPath("WIERSZ|(NR_DOMU_NABYWCY)");
-            string WIERSZ_NR_LOKALU_NABYWCY = xml.ChilkatPath("WIERSZ|(NR_LOKALU_NABYWCY)");
-            string WIERSZ_KOD_POCZTOWY_NABYWCY = xml.ChilkatPath("WIERSZ|(KOD_POCZTOWY_NABYWCY)");
-            string WIERSZ_MIEJSCOWOSC_NABYWCY = xml.ChilkatPath("WIERSZ|(MIEJSCOWOSC_NABYWCY)");
-            string WIERSZ_PANSTWO_NABYWCY = xml.ChilkatPath("WIERSZ|(PANSTWO_NABYWCY)");
 
-            string WIERSZ_CZY_NABYWCA_PLATNIKIEM_VAT = xml.ChilkatPath("WIERSZ|(CZY_NABYWCA_PLATNIKIEM_VAT)");
+            var nabywca = FindKontakt(WIERSZ_ID_NABYWCY, WIERSZ_NAZWA_SKROCONA_NABYWCY, WIERSZ_NAZWA_PELNA_NABYWCY, WIERSZ_NIP_NABYWCY, WIERSZ_KOD_KRESKOWY_NABYWCY);
 
+            faktura.Nabywca = nabywca;
+            nabywca.Ulica = xml.ChilkatPath("WIERSZ|(ULICA_NABYWCY)");
+            nabywca.NumerBudynku = xml.ChilkatPath("WIERSZ|(NR_DOMU_NABYWCY)");
+            nabywca.NumerLokalu = xml.ChilkatPath("WIERSZ|(NR_LOKALU_NABYWCY)");
+            nabywca.KodPocztowy = xml.ChilkatPath("WIERSZ|(KOD_POCZTOWY_NABYWCY)");
+            nabywca.Miejscowosc = xml.ChilkatPath("WIERSZ|(MIEJSCOWOSC_NABYWCY)");
+            nabywca.Kraj = xml.ChilkatPath("WIERSZ|(PANSTWO_NABYWCY)");
+
+
+
+            var adresNabywcy = FindAdres(nabywca.Ulica, nabywca.NumerBudynku, nabywca.NumerLokalu, nabywca.KodPocztowy, nabywca.Miejscowosc, nabywca.Kraj);
+            faktura.AdresNabywcy = adresNabywcy;
+            nabywca.Adresy.Add(adresNabywcy);
+            nabywca.PlatnikVat =  xml.ChilkatPath("WIERSZ|(CZY_NABYWCA_PLATNIKIEM_VAT)").ToBool();
+            
             string WIERSZ_ID_ODBIORCY = xml.ChilkatPath("WIERSZ|(ID_ODBIORCY)");
             string WIERSZ_NAZWA_SKROCONA_ODBIORCY = xml.ChilkatPath("WIERSZ|(NAZWA_SKROCONA_ODBIORCY)");
             string WIERSZ_NAZWA_PELNA_ODBIORCY = xml.ChilkatPath("WIERSZ|(NAZWA_PELNA_ODBIORCY)");
             string WIERSZ_KOD_KRESKOWY_ODBIORCY = xml.ChilkatPath("WIERSZ|(KOD_KRESKOWY_ODBIORCY)");
             string WIERSZ_NIP_ODBIORCY = xml.ChilkatPath("WIERSZ|(NIP_ODBIORCY)");
-            string WIERSZ_ULICA_ODBIORCY = xml.ChilkatPath("WIERSZ|(ULICA_ODBIORCY)");
-            string WIERSZ_NR_DOMU_ODBIORCY = xml.ChilkatPath("WIERSZ|(NR_DOMU_ODBIORCY)");
-            string WIERSZ_NR_LOKALU_ODBIORCY = xml.ChilkatPath("WIERSZ|(NR_LOKALU_ODBIORCY)");
-            string WIERSZ_KOD_POCZTOWY_ODBIORCY = xml.ChilkatPath("WIERSZ|(KOD_POCZTOWY_ODBIORCY)");
-            string WIERSZ_MIEJSCOWOSC_ODBIORCY = xml.ChilkatPath("WIERSZ|(MIEJSCOWOSC_ODBIORCY)");
-            string WIERSZ_PANSTWO_ODBIORCY = xml.ChilkatPath("WIERSZ|(PANSTWO_ODBIORCY)");
 
-            string WIERSZ_CZY_ODBIORCA_PLATNIKIEM_VAT = xml.ChilkatPath("WIERSZ|(CZY_ODBIORCA_PLATNIKIEM_VAT)");
-            string WIERSZ_ID_AKWIZYTORA = xml.ChilkatPath("WIERSZ|(ID_AKWIZYTORA)");
-            string WIERSZ_NAZWA_SKROCONA_AKWIZYTORA = xml.ChilkatPath("WIERSZ|(NAZWA_SKROCONA_AKWIZYTORA)");
-            string WIERSZ_NAZWA_PELNA_AKWIZYTORA = xml.ChilkatPath("WIERSZ|(NAZWA_PELNA_AKWIZYTORA)");
-            string WIERSZ_KOD_KRESKOWY_AKWIZYTORA = xml.ChilkatPath("WIERSZ|(KOD_KRESKOWY_AKWIZYTORA)");
-            string WIERSZ_NIP_AKWIZYTORA = xml.ChilkatPath("WIERSZ|(NIP_AKWIZYTORA)");
-            string WIERSZ_ID_RODZAJU_RABATU = xml.ChilkatPath("WIERSZ|(ID_RODZAJU_RABATU)");
-            string WIERSZ_NAZWA_RODZAJU_RABATU = xml.ChilkatPath("WIERSZ|(NAZWA_RODZAJU_RABATU)");
-            string WIERSZ_ID_RODZAJU_CEN = xml.ChilkatPath("WIERSZ|(ID_RODZAJU_CEN)");
-            string WIERSZ_NAZWA_RODZAJU_CEN = xml.ChilkatPath("WIERSZ|(NAZWA_RODZAJU_CEN)");
-            string WIERSZ_OSOBA_UPOWAZNIONA_DO_ODB_TOWARU = xml.ChilkatPath("WIERSZ|(OSOBA_UPOWAZNIONA_DO_ODB_TOWARU)");
-            string WIERSZ_ID_TABELI_KURSOWEJ = xml.ChilkatPath("WIERSZ|(ID_TABELI_KURSOWEJ)");
-            string WIERSZ_NUMER_TABELI_KURSOWEJ = xml.ChilkatPath("WIERSZ|(NUMER_TABELI_KURSOWEJ)");
-            string WIERSZ_ID_WALUTY_DOKUMENTU = xml.ChilkatPath("WIERSZ|(ID_WALUTY_DOKUMENTU)");
-            string WIERSZ_KOD_WALUTY_DOKUMENTU = xml.ChilkatPath("WIERSZ|(KOD_WALUTY_DOKUMENTU)");
-            string WIERSZ_NAZWA_WALUTY_DOKUMENTU = xml.ChilkatPath("WIERSZ|(NAZWA_WALUTY_DOKUMENTU)");
-            string WIERSZ_MNOZNIK_WALUTY_DOKUMENTU = xml.ChilkatPath("WIERSZ|(MNOZNIK_WALUTY_DOKUMENTU)");
-            string WIERSZ_KURS_WALUTY_DOKUMENTU = xml.ChilkatPath("WIERSZ|(KURS_WALUTY_DOKUMENTU)");
-            string WIERSZ_SPOSOB_WYLICZANIA_DOKUMENTU = xml.ChilkatPath("WIERSZ|(SPOSOB_WYLICZANIA_DOKUMENTU)");
-            string WIERSZ_DATA_SPRZEDAZY = xml.ChilkatPath("WIERSZ|(DATA_SPRZEDAZY)");
-            string WIERSZ_ID_SPOSOBU_PLATNOSCI = xml.ChilkatPath("WIERSZ|(ID_SPOSOBU_PLATNOSCI)");
-            string WIERSZ_SPOSOB_PLATNOSCI = xml.ChilkatPath("WIERSZ|(SPOSOB_PLATNOSCI)");
-            string WIERSZ_DATA_PLATNOSCI = xml.ChilkatPath("WIERSZ|(DATA_PLATNOSCI)");
-            string WIERSZ_WARTOSC_NETTO_SPRZEDAZY = xml.ChilkatPath("WIERSZ|(WARTOSC_NETTO_SPRZEDAZY)");
-            string WIERSZ_KWOTA_VAT_SPRZEDAZY = xml.ChilkatPath("WIERSZ|(KWOTA_VAT_SPRZEDAZY)");
-            string WIERSZ_WARTOSC_BRUTTO_SPRZEDAZY = xml.ChilkatPath("WIERSZ|(WARTOSC_BRUTTO_SPRZEDAZY)");
-            string WIERSZ_WARTOSC_NETTO_ZLOTOWKOWA = xml.ChilkatPath("WIERSZ|(WARTOSC_NETTO_ZLOTOWKOWA)");
-            string WIERSZ_KWOTA_VAT_ZLOTOWKOWA = xml.ChilkatPath("WIERSZ|(KWOTA_VAT_ZLOTOWKOWA)");
-            string WIERSZ_WARTOSC_BRUTTO_ZLOTOWKOWA = xml.ChilkatPath("WIERSZ|(WARTOSC_BRUTTO_ZLOTOWKOWA)");
-            string WIERSZ_WARTOSC_SPRZEDAZY_OPK_KAUCJONOWNYCH = xml.ChilkatPath("WIERSZ|(WARTOSC_SPRZEDAZY_OPK_KAUCJONOWNYCH)");
-            string WIERSZ_WARTOSC_ZLOTOWKOWA_OPK_KAUCJONOWNYCH = xml.ChilkatPath("WIERSZ|(WARTOSC_ZLOTOWKOWA_OPK_KAUCJONOWNYCH)");
-            string WIERSZ_UWAGI = xml.ChilkatPath("WIERSZ|(UWAGI)");
-            string WIERSZ_WYSTAWIL = xml.ChilkatPath("WIERSZ|(WYSTAWIL)");
-            string WIERSZ_DATA_DOPISANIA = xml.ChilkatPath("WIERSZ|(DATA_DOPISANIA)");
-            string WIERSZ_ZMIENIL = xml.ChilkatPath("WIERSZ|(ZMIENIL)");
-            string WIERSZ_DATA_ZMIANY = xml.ChilkatPath("WIERSZ|(DATA_ZMIANY)");
-            string WIERSZ_ID_KRAJU_PRZEZNACZENIA = xml.ChilkatPath("WIERSZ|(ID_KRAJU_PRZEZNACZENIA)");
-            string WIERSZ_KOD_KRAJU_PRZEZNACZENIA = xml.ChilkatPath("WIERSZ|(KOD_KRAJU_PRZEZNACZENIA)");
-            string WIERSZ_ID_WARUNKU_DOSTAWY = xml.ChilkatPath("WIERSZ|(ID_WARUNKU_DOSTAWY)");
-            string WIERSZ_KOD_WARUNKU_DOSTAWY = xml.ChilkatPath("WIERSZ|(KOD_WARUNKU_DOSTAWY)");
-            string WIERSZ_ID_RODZAJU_TRANSPORTU = xml.ChilkatPath("WIERSZ|(ID_RODZAJU_TRANSPORTU)");
-            string WIERSZ_KOD_RODZAJU_TRANSPORTU = xml.ChilkatPath("WIERSZ|(KOD_RODZAJU_TRANSPORTU)");
-            string WIERSZ_ID_RODZAJU_TRANSAKCJI = xml.ChilkatPath("WIERSZ|(ID_RODZAJU_TRANSAKCJI)");
-            string WIERSZ_KOD_RODZAJU_TRANSAKCJI = xml.ChilkatPath("WIERSZ|(KOD_RODZAJU_TRANSAKCJI)");
-            string WIERSZ_ANALITYKA_FK_GRUP_MAG = xml.ChilkatPath("WIERSZ|(ANALITYKA_FK_GRUP_MAG)");
-            string WIERSZ_ID_RDS = xml.ChilkatPath("WIERSZ|(ID_RDS)");
-            string WIERSZ_GLN_NABYWCY = xml.ChilkatPath("WIERSZ|(GLN_NABYWCY)");
-            string WIERSZ_GLN_ODBIORCY = xml.ChilkatPath("WIERSZ|(GLN_ODBIORCY)");
-            string WIERSZ_PODSTAWA_ZWOLNIENIA_Z_VAT = xml.ChilkatPath("WIERSZ|(PODSTAWA_ZWOLNIENIA_Z_VAT)");
-            string WIERSZ_MECHANIZM_PODZIELONEJ_PLATNOSCI = xml.ChilkatPath("WIERSZ|(MECHANIZM_PODZIELONEJ_PLATNOSCI)");
-            string WIERSZ_PROCEDURY_VAT = xml.ChilkatPath("WIERSZ|(PROCEDURY_VAT)");
-            string WIERSZ_NUMER_FS_DO_PA = xml.ChilkatPath("WIERSZ|(NUMER_FS_DO_PA)");
-            string WIERSZ_DATA_FS_DO_PA = xml.ChilkatPath("WIERSZ|(DATA_FS_DO_PA)");
-            string WIERSZ_NIP_KOD_KRAJU_PLATNIKA = xml.ChilkatPath("WIERSZ|(NIP_KOD_KRAJU_PLATNIKA)");
+            var odbiorca = FindKontakt(WIERSZ_ID_ODBIORCY, WIERSZ_NAZWA_SKROCONA_ODBIORCY, WIERSZ_NAZWA_PELNA_ODBIORCY, WIERSZ_NIP_ODBIORCY, WIERSZ_KOD_KRESKOWY_ODBIORCY);
+            faktura.Odbiorca = odbiorca;
+
+            odbiorca.Ulica = xml.ChilkatPath("WIERSZ|(ULICA_ODBIORCY)");
+            odbiorca.NumerBudynku = xml.ChilkatPath("WIERSZ|(NR_DOMU_ODBIORCY)");
+            odbiorca.NumerLokalu = xml.ChilkatPath("WIERSZ|(NR_LOKALU_ODBIORCY)");
+            odbiorca.KodPocztowy = xml.ChilkatPath("WIERSZ|(KOD_POCZTOWY_ODBIORCY)");
+            odbiorca.Miejscowosc = xml.ChilkatPath("WIERSZ|(MIEJSCOWOSC_ODBIORCY)");
+            odbiorca.Kraj = xml.ChilkatPath("WIERSZ|(PANSTWO_ODBIORCY)");
+
+            var adresOdbiorcy = FindAdres(odbiorca.Ulica, odbiorca.NumerBudynku, odbiorca.NumerLokalu, odbiorca.KodPocztowy, odbiorca.Miejscowosc, odbiorca.Kraj);
+            faktura.AdresOdbiorcy = adresOdbiorcy;
+            odbiorca.Adresy.Add(adresOdbiorcy);
+            odbiorca.PlatnikVat = xml.ChilkatPath("WIERSZ|(CZY_ODBIORCA_PLATNIKIEM_VAT)").ToBool();
+
+
+            faktura.CzyOdbiorcaPlatnikiemVat = xml.ChilkatPath("WIERSZ|(CZY_ODBIORCA_PLATNIKIEM_VAT)").ToBool();
+            faktura.IdAkwizytora = xml.ChilkatPath("WIERSZ|(ID_AKWIZYTORA)").ToInt();
+            faktura.NazwaSkroconaAkwizytora = xml.ChilkatPath("WIERSZ|(NAZWA_SKROCONA_AKWIZYTORA)");
+            faktura.NazwaPelnaAkwizytora = xml.ChilkatPath("WIERSZ|(NAZWA_PELNA_AKWIZYTORA)");
+            faktura.KodKreskowyAkwizytora = xml.ChilkatPath("WIERSZ|(KOD_KRESKOWY_AKWIZYTORA)");
+            faktura.NipAkwizytora = xml.ChilkatPath("WIERSZ|(NIP_AKWIZYTORA)");
+            faktura.IdRodzajuRabatu = xml.ChilkatPath("WIERSZ|(ID_RODZAJU_RABATU)").ToInt();
+            faktura.NazwaRodzajuRabatu = xml.ChilkatPath("WIERSZ|(NAZWA_RODZAJU_RABATU)");
+            faktura.IdRodzajuCen = xml.ChilkatPath("WIERSZ|(ID_RODZAJU_CEN)").ToInt();
+            faktura.NazwaRodzajuCen = xml.ChilkatPath("WIERSZ|(NAZWA_RODZAJU_CEN)");
+            faktura.OsobaUpowaznionaDoOdbTowaru = xml.ChilkatPath("WIERSZ|(OSOBA_UPOWAZNIONA_DO_ODB_TOWARU)");
+            faktura.IdTabeliKursowej = xml.ChilkatPath("WIERSZ|(ID_TABELI_KURSOWEJ)").ToInt();
+            faktura.NumerTabeliKursowej = xml.ChilkatPath("WIERSZ|(NUMER_TABELI_KURSOWEJ)");
+            faktura.IdWalutyDokumentu = xml.ChilkatPath("WIERSZ|(ID_WALUTY_DOKUMENTU)").ToInt();
+            faktura.KodWalutyDokumentu = xml.ChilkatPath("WIERSZ|(KOD_WALUTY_DOKUMENTU)");
+            faktura.NazwaWalutyDokumentu = xml.ChilkatPath("WIERSZ|(NAZWA_WALUTY_DOKUMENTU)");
+            faktura.MnoznikWalutyDokumentu = xml.ChilkatPath("WIERSZ|(MNOZNIK_WALUTY_DOKUMENTU)").ToInt();
+            faktura.KursWalutyDokumentu = xml.ChilkatPath("WIERSZ|(KURS_WALUTY_DOKUMENTU)").ToDecimal();
+            faktura.SposobWyliczaniaDokumentu = xml.ChilkatPath("WIERSZ|(SPOSOB_WYLICZANIA_DOKUMENTU)").ToInt();
+            faktura.DataSprzedazy = xml.ChilkatPath("WIERSZ|(DATA_SPRZEDAZY)").ToDate();
+            faktura.IdSposobuPlatnosci = xml.ChilkatPath("WIERSZ|(ID_SPOSOBU_PLATNOSCI)").ToInt();
+            faktura.SposobPlatnosci = xml.ChilkatPath("WIERSZ|(SPOSOB_PLATNOSCI)");
+            faktura.DataPlatnosci = xml.ChilkatPath("WIERSZ|(DATA_PLATNOSCI)").ToDate();
+            faktura.WartoscNettoSprzedazy = xml.ChilkatPath("WIERSZ|(WARTOSC_NETTO_SPRZEDAZY)").ToDecimal();
+            faktura.KwotaVatSprzedazy = xml.ChilkatPath("WIERSZ|(KWOTA_VAT_SPRZEDAZY)").ToDecimal();
+            faktura.WartoscBruttoSprzedazy = xml.ChilkatPath("WIERSZ|(WARTOSC_BRUTTO_SPRZEDAZY)").ToDecimal();
+            faktura.WartoscNettoZlotowkowa = xml.ChilkatPath("WIERSZ|(WARTOSC_NETTO_ZLOTOWKOWA)").ToDecimal();
+            faktura.KwotaVatZlotowkowa = xml.ChilkatPath("WIERSZ|(KWOTA_VAT_ZLOTOWKOWA)").ToDecimal();
+            faktura.WartoscBruttoZlotowkowa = xml.ChilkatPath("WIERSZ|(WARTOSC_BRUTTO_ZLOTOWKOWA)").ToDecimal();
+            faktura.WartoscSprzedazyOpkKaucjonownych = xml.ChilkatPath("WIERSZ|(WARTOSC_SPRZEDAZY_OPK_KAUCJONOWNYCH)").ToDecimal();
+            faktura.WartoscZlotowkowaOpkKaucjonownych = xml.ChilkatPath("WIERSZ|(WARTOSC_ZLOTOWKOWA_OPK_KAUCJONOWNYCH)").ToDecimal();
+            faktura.Uwagi = xml.ChilkatPath("WIERSZ|(UWAGI)");
+            faktura.Wystawil = xml.ChilkatPath("WIERSZ|(WYSTAWIL)");
+            faktura.DataDopisania = xml.ChilkatPath("WIERSZ|(DATA_DOPISANIA)");
+            faktura.Zmienil = xml.ChilkatPath("WIERSZ|(ZMIENIL)");
+            faktura.DataZmiany = xml.ChilkatPath("WIERSZ|(DATA_ZMIANY)");
+            faktura.IdKrajuPrzeznaczenia = xml.ChilkatPath("WIERSZ|(ID_KRAJU_PRZEZNACZENIA)").ToInt();
+            faktura.KodKrajuPrzeznaczenia = xml.ChilkatPath("WIERSZ|(KOD_KRAJU_PRZEZNACZENIA)");
+            faktura.IdWarunkuDostawy = xml.ChilkatPath("WIERSZ|(ID_WARUNKU_DOSTAWY)").ToInt();
+            faktura.KodWarunkuDostawy = xml.ChilkatPath("WIERSZ|(KOD_WARUNKU_DOSTAWY)");
+            faktura.IdRodzajuTransportu = xml.ChilkatPath("WIERSZ|(ID_RODZAJU_TRANSPORTU)").ToInt();
+            faktura.KodRodzajuTransportu = xml.ChilkatPath("WIERSZ|(KOD_RODZAJU_TRANSPORTU)");
+            faktura.IdRodzajuTransakcji = xml.ChilkatPath("WIERSZ|(ID_RODZAJU_TRANSAKCJI)").ToInt();
+            faktura.KodRodzajuTransakcji = xml.ChilkatPath("WIERSZ|(KOD_RODZAJU_TRANSAKCJI)");
+            faktura.AnalitykaFkGrupMag = xml.ChilkatPath("WIERSZ|(ANALITYKA_FK_GRUP_MAG)");
+            faktura.IdRds = xml.ChilkatPath("WIERSZ|(ID_RDS)").ToInt();
+            faktura.GlnNabywcy = xml.ChilkatPath("WIERSZ|(GLN_NABYWCY)");
+            faktura.GlnOdbiorcy = xml.ChilkatPath("WIERSZ|(GLN_ODBIORCY)");
+            faktura.PodstawaZwolnieniaZVat = xml.ChilkatPath("WIERSZ|(PODSTAWA_ZWOLNIENIA_Z_VAT)");
+            faktura.MechanizmPodzielonejPlatnosci = xml.ChilkatPath("WIERSZ|(MECHANIZM_PODZIELONEJ_PLATNOSCI)").ToInt();
+            faktura.ProceduryVat = xml.ChilkatPath("WIERSZ|(PROCEDURY_VAT)");
+            faktura.NumerFsDoPa = xml.ChilkatPath("WIERSZ|(NUMER_FS_DO_PA)");
+            faktura.DataFsDoPa = xml.ChilkatPath("WIERSZ|(DATA_FS_DO_PA)").ToDate();
+            faktura.NipKodKrajuPlatnika = xml.ChilkatPath("WIERSZ|(NIP_KOD_KRAJU_PLATNIKA)");
             int i = 0;
             int count_i = xml.NumChildrenHavingTag("WIERSZ|POZYCJE|WIERSZ");
             while (i < count_i)
             {
                 xml.I = i;
+
+                
                 WIERSZ_ID = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ID)");
-                WIERSZ_ID_WZ = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ID_WZ)");
-                WIERSZ_ID_ARTYKULU = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ID_ARTYKULU)");
-                WIERSZ_INDEKS_ARTYKULU = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(INDEKS_ARTYKULU)");
-                WIERSZ_TYP_ARTYKULU = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(TYP_ARTYKULU)");
-                WIERSZ_INDEKS_WG_PLATNIKA = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(INDEKS_WG_PLATNIKA)");
-                WIERSZ_NAZWA_WG_PLATNIKA = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(NAZWA_WG_PLATNIKA)");
-                WIERSZ_ID_JEDNOSTKI_MIARY = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ID_JEDNOSTKI_MIARY)");
-                WIERSZ_SKROT_JEDNOSTKI_MIARY = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(SKROT_JEDNOSTKI_MIARY)");
-                WIERSZ_NAZWA_JEDNOSTKI_MIARY = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(NAZWA_JEDNOSTKI_MIARY)");
-                WIERSZ_WSPOLCZYNNIK_JEDNOSTEK = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(WSPOLCZYNNIK_JEDNOSTEK)");
-                WIERSZ_ILOSC = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ILOSC)");
-                WIERSZ_ID_RODZAJU_CENY_SPRZEDAZY = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ID_RODZAJU_CENY_SPRZEDAZY)");
-                WIERSZ_NAZWA_RODZAJU_CENY_SPRZEDAZY = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(NAZWA_RODZAJU_CENY_SPRZEDAZY)");
-                WIERSZ_ID_RODZAJU_RABATU = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ID_RODZAJU_RABATU)");
-                WIERSZ_NAZWA_RODZAJU_RABATU = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(NAZWA_RODZAJU_RABATU)");
-                WIERSZ_CENA_NETTO_PRZED_RABATEM = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(CENA_NETTO_PRZED_RABATEM)");
-                WIERSZ_CENA_BRUTTO_PRZED_RABATEM = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(CENA_BRUTTO_PRZED_RABATEM)");
-                WIERSZ_RABAT = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(RABAT)");
-                WIERSZ_CENA_NETTO_PO_RABACIE = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(CENA_NETTO_PO_RABACIE)");
-                WIERSZ_ID_STAWKI_SPRZEDAZY = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ID_STAWKI_SPRZEDAZY)");
-                WIERSZ_STAWKA_SPRZEDAZY = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(STAWKA_SPRZEDAZY)");
-                WIERSZ_TYP_STAWKI_SPRZEDAZY = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(TYP_STAWKI_SPRZEDAZY)");
-                WIERSZ_CENA_BRUTTO_PO_RABACIE = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(CENA_BRUTTO_PO_RABACIE)");
-                WIERSZ_CENA_ZLOTOWKOWA_NETTO = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(CENA_ZLOTOWKOWA_NETTO)");
-                WIERSZ_CENA_ZLOTOWKOWA_BRUTTO = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(CENA_ZLOTOWKOWA_BRUTTO)");
-                WIERSZ_WARTOSC_NETTO = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(WARTOSC_NETTO)");
-                WIERSZ_KWOTA_VAT = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(KWOTA_VAT)");
-                WIERSZ_WARTOSC_BRUTTO = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(WARTOSC_BRUTTO)");
-                WIERSZ_WARTOSC_NETTO_PLN = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(WARTOSC_NETTO_PLN)");
-                WIERSZ_KWOTA_VAT_PLN = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(KWOTA_VAT_PLN)");
-                WIERSZ_WARTOSC_BRUTTO_PLN = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(WARTOSC_BRUTTO_PLN)");
-                WIERSZ_NUMER_SERYJNY = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(NUMER_SERYJNY)");
-                WIERSZ_NUMER_SERYJNY_SPRZEDAZY = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(NUMER_SERYJNY_SPRZEDAZY)");
-                WIERSZ_ID_OPAKOWANIA = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ID_OPAKOWANIA)");
-                WIERSZ_SKROT_OPAKOWANIA = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(SKROT_OPAKOWANIA)");
-                WIERSZ_ILOSC_OPAKOWAN = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ILOSC_OPAKOWAN)");
-                WIERSZ_WAGA_NETTO = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(WAGA_NETTO)");
-                WIERSZ_WAGA_BRUTTO = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(WAGA_BRUTTO)");
-                WIERSZ_WAGA_OPAKOWAN = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(WAGA_OPAKOWAN)");
-                WIERSZ_PROWIZJA_AKWIZYTORA = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(PROWIZJA_AKWIZYTORA)");
-                WIERSZ_UWAGI = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(UWAGI)");
-                WIERSZ_ZNACZNIKI = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ZNACZNIKI)");
-                WIERSZ_CECHY = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(CECHY)");
-                WIERSZ_DATA_WYDANIA = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(DATA_WYDANIA)");
-                WIERSZ_KURS = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(KURS)");
+                RaksPozycjeFaktury  pozycja = FindPozycjaFaktury(WIERSZ_ID);
+                faktura.Pozycje.Add(pozycja);
+
+                pozycja.IdWz = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ID_WZ)").ToInt();
+                pozycja.IdArtykulu = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ID_ARTYKULU)").ToInt();
+                pozycja.IndeksArtykulu = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(INDEKS_ARTYKULU)");
+                pozycja.TypArtykulu = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(TYP_ARTYKULU)");
+                pozycja.IndeksWgPlatnika = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(INDEKS_WG_PLATNIKA)");
+                pozycja.NazwaWgPlatnika = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(NAZWA_WG_PLATNIKA)");
+                pozycja.IdJednostkiMiary = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ID_JEDNOSTKI_MIARY)").ToInt();
+                pozycja.SkrotJednostkiMiary = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(SKROT_JEDNOSTKI_MIARY)");
+                pozycja.NazwaJednostkiMiary = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(NAZWA_JEDNOSTKI_MIARY)");
+                pozycja.WspolczynnikJednostek = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(WSPOLCZYNNIK_JEDNOSTEK)").ToDecimal();
+                pozycja.Ilosc = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ILOSC)").ToDecimal();
+                pozycja.IdRodzajuCenySprzedazy = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ID_RODZAJU_CENY_SPRZEDAZY)").ToInt();
+                pozycja.NazwaRodzajuCenySprzedazy = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(NAZWA_RODZAJU_CENY_SPRZEDAZY)");
+                pozycja.IdRodzajuRabatu = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ID_RODZAJU_RABATU)").ToInt();
+                pozycja.NazwaRodzajuRabatu = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(NAZWA_RODZAJU_RABATU)");
+                pozycja.CenaNettoPrzedRabatem = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(CENA_NETTO_PRZED_RABATEM)").ToDecimal();
+                pozycja.CenaBruttoPrzedRabatem = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(CENA_BRUTTO_PRZED_RABATEM)").ToDecimal();
+                pozycja.Rabat = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(RABAT)").ToDecimal();
+                pozycja.CenaNettoPoRabacie = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(CENA_NETTO_PO_RABACIE)").ToDecimal();
+                pozycja.IdStawkiSprzedazy = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ID_STAWKI_SPRZEDAZY)").ToInt();
+                pozycja.StawkaSprzedazy = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(STAWKA_SPRZEDAZY)").ToDecimal();
+                pozycja.TypStawkiSprzedazy = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(TYP_STAWKI_SPRZEDAZY)").ToInt();
+                pozycja.CenaBruttoPoRabacie = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(CENA_BRUTTO_PO_RABACIE)").ToDecimal();
+                pozycja.CenaZlotowkowaNetto = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(CENA_ZLOTOWKOWA_NETTO)").ToDecimal();
+                pozycja.CenaZlotowkowaBrutto = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(CENA_ZLOTOWKOWA_BRUTTO)").ToDecimal();
+                pozycja.WartoscNetto = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(WARTOSC_NETTO)").ToDecimal();
+                pozycja.KwotaVat = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(KWOTA_VAT)").ToDecimal();
+                pozycja.WartoscBrutto = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(WARTOSC_BRUTTO)").ToDecimal();
+                pozycja.WartoscNettoPln = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(WARTOSC_NETTO_PLN)").ToDecimal();
+                pozycja.KwotaVatPln = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(KWOTA_VAT_PLN)").ToDecimal();
+                pozycja.WartoscBruttoPln = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(WARTOSC_BRUTTO_PLN)").ToDecimal();
+                pozycja.NumerSeryjny = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(NUMER_SERYJNY)");
+                pozycja.NumerSeryjnySprzedazy = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(NUMER_SERYJNY_SPRZEDAZY)");
+                pozycja.IdOpakowania = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ID_OPAKOWANIA)").ToInt();
+                pozycja.SkrotOpakowania = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(SKROT_OPAKOWANIA)");
+                pozycja.IloscOpakowan = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ILOSC_OPAKOWAN)").ToDecimal();
+                pozycja.WagaNetto = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(WAGA_NETTO)").ToDecimal();
+                pozycja.WagaBrutto = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(WAGA_BRUTTO)").ToDecimal();
+                pozycja.WagaOpakowan = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(WAGA_OPAKOWAN)").ToDecimal();
+                pozycja.ProwizjaAkwizytora = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(PROWIZJA_AKWIZYTORA)").ToDecimal();
+                pozycja.Uwagi = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(UWAGI)");
+                //  WIERSZ_ZNACZNIKI = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(ZNACZNIKI)");
+                pozycja.Cechy = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(CECHY)");
+                pozycja.DataWydania = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(DATA_WYDANIA)").ToDate();
+                pozycja.Kurs = xml.ChilkatPath("WIERSZ|POZYCJE|WIERSZ[i]|(KURS)").ToDecimal();
                 i = i + 1;
             }
 
@@ -844,19 +876,81 @@ namespace Receptury.Module
             {
                 xml.I = i;
                 WIERSZ_ID_KONTAKTU = xml.ChilkatPath("WIERSZ|PLATNOSCI|WIERSZ[i]|(ID_KONTAKTU)");
-                WIERSZ_ID_SPOSOBU_PLATNOSCI = xml.ChilkatPath("WIERSZ|PLATNOSCI|WIERSZ[i]|(ID_SPOSOBU_PLATNOSCI)");
+             //   WIERSZ_ID_SPOSOBU_PLATNOSCI = xml.ChilkatPath("WIERSZ|PLATNOSCI|WIERSZ[i]|(ID_SPOSOBU_PLATNOSCI)");
                 WIERSZ_ID_METODY_PLATNOSCI = xml.ChilkatPath("WIERSZ|PLATNOSCI|WIERSZ[i]|(ID_METODY_PLATNOSCI)");
                 WIERSZ_ID_ROZRACHUNKU = xml.ChilkatPath("WIERSZ|PLATNOSCI|WIERSZ[i]|(ID_ROZRACHUNKU)");
-                WIERSZ_DATA_PLATNOSCI = xml.ChilkatPath("WIERSZ|PLATNOSCI|WIERSZ[i]|(DATA_PLATNOSCI)");
+           //     WIERSZ_DATA_PLATNOSCI = xml.ChilkatPath("WIERSZ|PLATNOSCI|WIERSZ[i]|(DATA_PLATNOSCI)");
                 WIERSZ_WARTOSC_PLN = xml.ChilkatPath("WIERSZ|PLATNOSCI|WIERSZ[i]|(WARTOSC_PLN)");
                 WIERSZ_WARTOSC_WAL = xml.ChilkatPath("WIERSZ|PLATNOSCI|WIERSZ[i]|(WARTOSC_WAL)");
                 WIERSZ_KOD_WALUTY = xml.ChilkatPath("WIERSZ|PLATNOSCI|WIERSZ[i]|(KOD_WALUTY)");
-                WIERSZ_UWAGI = xml.ChilkatPath("WIERSZ|PLATNOSCI|WIERSZ[i]|(UWAGI)");
-                WIERSZ_ZNACZNIKI = xml.ChilkatPath("WIERSZ|PLATNOSCI|WIERSZ[i]|(ZNACZNIKI)");
+            //    WIERSZ_UWAGI = xml.ChilkatPath("WIERSZ|PLATNOSCI|WIERSZ[i]|(UWAGI)");
+             //   WIERSZ_ZNACZNIKI = xml.ChilkatPath("WIERSZ|PLATNOSCI|WIERSZ[i]|(ZNACZNIKI)");
                 i = i + 1;
             }
 
 
+        }
+
+        private RaksPozycjeFaktury FindPozycjaFaktury(string id)
+        {
+            var pid = int.Parse(id);
+            var rec = objectSpace.FindObject<RaksPozycjeFaktury>(new BinaryOperator(nameof(RaksPozycjeFaktury.Id), pid));
+            if (rec == null)
+            {
+                rec = objectSpace.CreateObject<RaksPozycjeFaktury>();
+                rec.Id = pid;
+
+            }
+
+            return rec;
+        }
+
+        private RaksKontakt FindKontakt(string id, string skrot, string nazwa, string nip, string kod)
+        {
+            var pid = int.Parse(id);
+            var rec = objectSpace.FindObject<RaksKontakt>(new BinaryOperator(nameof(RaksKontakt.Id), pid));
+            if (rec == null)
+            {
+                rec = objectSpace.CreateObject<RaksKontakt>();
+                rec.Id = pid;
+                rec.NazwaPelna = nazwa;
+                rec.NazwaSkrocona = skrot;
+                rec.Nip = nip;
+                rec.KodKreskowy = kod;
+
+            }
+
+            return rec;
+        }
+
+        private RaksMagazyn FindMagazyn(string id, string numer, string nazwa, string analityka)
+        {
+            var pid = int.Parse(id);
+            var rec = objectSpace.FindObject<RaksMagazyn>(new BinaryOperator(nameof(RaksMagazyn.Id), pid));
+            if (rec == null)
+            {
+                rec = objectSpace.CreateObject<RaksMagazyn>();
+                rec.Id = pid;
+                rec.Nazwa = nazwa;
+                rec.Numer = numer;
+                rec.Analityka = analityka;
+            }
+
+            return rec;
+        }
+
+        private RaksFaktura FindFaktura(string id)
+        {
+            var pid = int.Parse(id);
+            var rec = objectSpace.FindObject<RaksFaktura>(new BinaryOperator(nameof(RaksFaktura.Id), pid));
+            if (rec == null)
+            {
+                rec = objectSpace.CreateObject<RaksFaktura>();
+                rec.Id = pid;
+
+            }
+
+            return rec;
         }
 
         private RaksStawkaVat FindStawkaVat(int id,decimal stawka, int typ)
@@ -917,6 +1011,27 @@ namespace Receptury.Module
                 }
                 return rec;
     
+        }
+
+
+        private RaksAdres FindAdres(string ulica, string nrdomu, string nrlokalu, string kodpocztowy, string miejscowosc, string panstwo)
+        {
+
+            RaksAdres rec = objectSpace.FindObject<RaksAdres>( CriteriaOperator.Parse($"{nameof(RaksAdres.Ulica)} =  '{ulica}' And {nameof(RaksAdres.Miejscowosc)} =  '{miejscowosc}' And {nameof(RaksAdres.NumerDomu)} =  '{nrdomu}'  And {nameof(RaksAdres.Kraj)} =  '{panstwo}'"));
+
+            if (rec == null)
+            {
+                rec = objectSpace.CreateObject<RaksAdres>();
+                rec.Id = objectSpace.GetObjectsQuery<RaksAdres>(true).Max(a=>a.Id) + 1;
+                rec.Miejscowosc = miejscowosc;
+                rec.KodPocztowy = kodpocztowy;
+                rec.Ulica = ulica;
+                rec.NumerDomu = nrdomu;
+                rec.NumerLokalu = nrlokalu;
+                rec.Kraj = panstwo;
+            }
+            return rec;
+
         }
 
         private RaksGrupaKontaktow FindGrupaKontaktu(string id, string nazwa, bool createIfNotExist = true)

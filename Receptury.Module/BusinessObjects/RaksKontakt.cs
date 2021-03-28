@@ -11,12 +11,13 @@ namespace Receptury.Module.BusinessObjects
 {
     [DefaultClassOptions]
     [XafDefaultProperty(nameof(NazwaSkrocona))]
-    public class RaksKontakt : XPCustomObject
+    public class RaksKontakt : XPObject
     {
         public RaksKontakt(Session session) : base(session)
         { }
 
 
+        bool platnikVat;
         string uwagi;
         int typKontaktu;
         RaksAdres adresDomyslny;
@@ -29,7 +30,7 @@ namespace Receptury.Module.BusinessObjects
         string nazwaSkrocona;
         RaksGrupaKontaktow grupa;
         int id;
-        [Key(false)]
+
         public int Id
         {
             get => id;
@@ -98,6 +99,12 @@ namespace Receptury.Module.BusinessObjects
             set => SetPropertyValue(nameof(AdresDomyslny), ref adresDomyslny, value);
         }
 
+        
+        public bool PlatnikVat
+        {
+            get => platnikVat;
+            set => SetPropertyValue(nameof(PlatnikVat), ref platnikVat, value);
+        }
 
         int idgrupy;
         /// <summary>

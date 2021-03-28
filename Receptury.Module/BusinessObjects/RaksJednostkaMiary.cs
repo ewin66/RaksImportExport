@@ -20,7 +20,7 @@ namespace Receptury.Module.BusinessObjects
     //[DefaultListViewOptions(MasterDetailMode.ListViewOnly, false, NewItemRowPosition.None)]
     //[Persistent("DatabaseTableName")]
     // Specify more UI options using a declarative approach (https://documentation.devexpress.com/#eXpressAppFramework/CustomDocument112701).
-    public class RaksJednostkaMiary : XPCustomObject
+    public class RaksJednostkaMiary : XPObject
     { // Inherit from a different class to provide a custom primary key, concurrency and deletion behavior, etc. (https://documentation.devexpress.com/eXpressAppFramework/CustomDocument113146.aspx).
         public RaksJednostkaMiary(Session session)
             : base(session)
@@ -37,7 +37,7 @@ namespace Receptury.Module.BusinessObjects
         string nazwa;
         string skrot;
         int id;
-        [Key(false)]
+
         public int Id
 
         {

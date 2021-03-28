@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Receptury.Module.BusinessObjects
 {
     [DefaultClassOptions]
-    public class RaksClass : XPCustomObject
+    public class RaksClass : XPObject
     {
         public RaksClass(Session session) : base(session)
         { }
@@ -17,7 +17,7 @@ namespace Receptury.Module.BusinessObjects
         /// <summary>
         /// 
         /// <summary>
-        [Key(false)]
+
         public int Id
         {
             get => id;

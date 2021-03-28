@@ -10,7 +10,7 @@ namespace Receptury.Module.BusinessObjects
 {
 
     [DefaultClassOptions]
-    public class RodzajCenySprzedazy : XPCustomObject
+    public class RodzajCenySprzedazy : XPObject
     {
         public RodzajCenySprzedazy(Session session) : base(session)
         { }
@@ -18,7 +18,7 @@ namespace Receptury.Module.BusinessObjects
         /// <summary>
         /// Identyfikator rodzaju cen sprzedaży
         /// <summary>
-        [Key(false)]
+
         public int Id
         {
             get => id;

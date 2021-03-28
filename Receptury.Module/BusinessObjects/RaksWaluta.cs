@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Receptury.Module.BusinessObjects
 {
-    public class RaksWaluta : XPCustomObject
+    public class RaksWaluta : XPObject
     {
         public RaksWaluta(Session session) : base(session)
         { }
@@ -15,7 +15,7 @@ namespace Receptury.Module.BusinessObjects
 
         string nazwa;
         int id;
-        [Key(false)]
+
         public int Id
         {
             get => id;

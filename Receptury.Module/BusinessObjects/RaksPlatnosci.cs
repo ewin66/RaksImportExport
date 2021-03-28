@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Receptury.Module.BusinessObjects
 {
-    public class RaksPlatnosci : XPCustomObject
+    public class RaksPlatnosci : XPObject
     {
         public RaksPlatnosci(Session session) : base(session)
         { }

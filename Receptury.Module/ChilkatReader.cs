@@ -472,7 +472,6 @@ namespace RaksRecepturyImport
                 }
             }
         }
-
         public void ImportRaksArtykuly()
         {
             int licznik = 0;
@@ -496,6 +495,44 @@ namespace RaksRecepturyImport
                                 var doc = XDocument.Load(subReader);
                                 var reader = new FakturyReader(objectSpace);
                                 reader.ReadArtykuly(doc.ToString());
+                                Console.WriteLine($"{licznik}");
+
+                                licznik++;
+                            }
+                        }
+                        else
+                        {
+                            lk++;
+                        }
+
+                    }
+                }
+            }
+        }
+
+        public void ImportRaksFaktury()
+        {
+            int licznik = 0;
+            Directory.CreateDirectory("xml");
+            string fileName = @"d:/apps/faktury.xml";
+            using (var xr = XmlReader.Create(fileName))
+            {
+                int lk = 0;
+                while (xr.Read())
+                {
+                    if (xr.NodeType != XmlNodeType.Element)
+                        continue;
+                    if (xr.Name == "FAKTURY_SPRZEDAZY")
+                    // ReadSubtree() positions the reader at the EndElement of the element read, so the 
+                    // next call to Read() moves to the next node.
+                    {
+                        if (lk == 1)
+                        {
+                            using (var subReader = xr.ReadSubtree())
+                            {
+                                var doc = XDocument.Load(subReader);
+                                var reader = new FakturyReader(objectSpace);
+                                reader.ReadFaktury(doc.ToString());
                                 Console.WriteLine($"{licznik}");
 
                                 licznik++;

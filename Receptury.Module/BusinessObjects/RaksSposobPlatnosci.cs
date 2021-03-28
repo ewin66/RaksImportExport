@@ -10,7 +10,7 @@ namespace Receptury.Module.BusinessObjects
 {
 
     [DefaultClassOptions]
-    public class RaksSposobPlatnosci : XPCustomObject
+    public class RaksSposobPlatnosci : XPObject
     {
         public RaksSposobPlatnosci(Session session) : base(session)
         { }
@@ -18,7 +18,7 @@ namespace Receptury.Module.BusinessObjects
         /// <summary>
         /// Identyfikator rekordu
         /// <summary>
-        [Key(false)]
+
         public int Id
         {
             get => id;

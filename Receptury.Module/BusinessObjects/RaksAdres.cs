@@ -10,7 +10,7 @@ namespace Receptury.Module.BusinessObjects
 {
 
     [DefaultClassOptions]
-    public class RaksAdres : XPCustomObject
+    public class RaksAdres : XPObject
     {
         public RaksAdres(Session session) : base(session)
         { }
@@ -31,7 +31,7 @@ namespace Receptury.Module.BusinessObjects
         string numerDomu;
         string ulica;
         int id;
-        [Key(false)]
+    
         public int Id
         {
             get => id;

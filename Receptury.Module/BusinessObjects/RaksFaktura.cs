@@ -9,14 +9,20 @@ using System.Threading.Tasks;
 namespace Receptury.Module.BusinessObjects
 {
     [DefaultClassOptions]
-    public class RaksFaktura : XPCustomObject
+    public class RaksFaktura : XPObject
     {
         public RaksFaktura(Session session) : base(session)
         { }
 
+        RaksAdres adresOdbiorcy;
+        RaksKontakt odbiorca;
+        RaksAdres adresNabywcy;
+        RaksKontakt nabywca;
+        RaksKontakt sprzedawca;
+        RaksMagazyn magazyn;
         int id;
         //Identyfikator rekordu
-        [Key(false)]
+ 
         public int Id
         {
             get => id;
@@ -52,6 +58,14 @@ namespace Receptury.Module.BusinessObjects
         {
             get => analitykafkmagazynu;
             set => SetPropertyValue(nameof(AnalitykaFkMagazynu), ref analitykafkmagazynu, value);
+        }
+
+
+
+        public RaksMagazyn Magazyn
+        {
+            get => magazyn;
+            set => SetPropertyValue(nameof(Magazyn), ref magazyn, value);
         }
         int idsprzedawcy;
         //Identyfikator sprzedawcy (-1 - dane firmy; -ID-1 - dane filii)
@@ -91,6 +105,14 @@ namespace Receptury.Module.BusinessObjects
         {
             get => kodkreskowysprzedawcy;
             set => SetPropertyValue(nameof(KodKreskowySprzedawcy), ref kodkreskowysprzedawcy, value);
+        }
+
+
+
+        public RaksKontakt Sprzedawca
+        {
+            get => sprzedawca;
+            set => SetPropertyValue(nameof(Sprzedawca), ref sprzedawca, value);
         }
         string rodzajdoksprzedazy;
         //Rodzaj dokumentu sprzedaży, możliwe wartości to: PA - paragon, FS - faktura VAT, FE - faktura eksportowa
@@ -178,6 +200,20 @@ namespace Receptury.Module.BusinessObjects
         {
             get => zafiskalizowany;
             set => SetPropertyValue(nameof(Zafiskalizowany), ref zafiskalizowany, value);
+        }
+
+
+        public RaksKontakt Nabywca
+        {
+            get => nabywca;
+            set => SetPropertyValue(nameof(Nabywca), ref nabywca, value);
+        }
+
+
+        public RaksAdres AdresNabywcy
+        {
+            get => adresNabywcy;
+            set => SetPropertyValue(nameof(AdresNabywcy), ref adresNabywcy, value);
         }
         int idnabywcy;
         //Identyfikator nabywcy z sekcji KONTAKTY
@@ -272,6 +308,20 @@ namespace Receptury.Module.BusinessObjects
         {
             get => czynabywcaplatnikiemvat;
             set => SetPropertyValue(nameof(CzyNabywcaPlatnikiemVat), ref czynabywcaplatnikiemvat, value);
+        }
+
+
+        public RaksKontakt Odbiorca
+        {
+            get => odbiorca;
+            set => SetPropertyValue(nameof(Odbiorca), ref odbiorca, value);
+        }
+
+        
+        public RaksAdres AdresOdbiorcy
+        {
+            get => adresOdbiorcy;
+            set => SetPropertyValue(nameof(AdresOdbiorcy), ref adresOdbiorcy, value);
         }
         int idodbiorcy;
         //Identyfikator odbiorcy z sekcji KONTAKTY

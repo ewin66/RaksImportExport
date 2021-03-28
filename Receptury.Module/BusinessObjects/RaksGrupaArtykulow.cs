@@ -11,7 +11,7 @@ namespace Receptury.Module.BusinessObjects
 {
     [DefaultClassOptions]
     [XafDefaultProperty(nameof(Nazwa))]
-    public class RaksGrupaArtykulow : XPCustomObject
+    public class RaksGrupaArtykulow : XPObject
     {
         public RaksGrupaArtykulow(Session session) : base(session)
         { }
@@ -22,7 +22,7 @@ namespace Receptury.Module.BusinessObjects
         int id;
         int idNadrzednej;
 
-        [Key(false)]
+
         public int Id
         {
             get => id;

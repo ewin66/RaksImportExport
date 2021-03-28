@@ -83,21 +83,37 @@ namespace Receptury.Module.Controllers
                     artykul.Vat = rec;
                 }
 
-                //if (artykul.Dostawca == null)
-                //{
-                //    RaksKontrahent rec = DodajKontarhenta(artykul.IdDostawcy, artykul.NazwaDostawcy, artykul.NipDostawcy);
-                //    artykul.Dostawca = rec;
-                //}
-                //if (artykul.Producent == null && !string.IsNullOrEmpty(artykul.NazwaProducenta))
-                //{
-                //    RaksKontrahent rec = DodajKontarhenta(artykul.IdProducenta, artykul.NazwaProducenta, artykul.NipProducenta);
-                //    artykul.Producent = rec;
-                //}
+                if (artykul.Dostawca == null)
+                {
+                    RaksKontakt rec = FindKontakt(artykul.IdDostawcy, artykul.NazwaDostawcy, artykul.NipDostawcy);
+                    artykul.Dostawca = rec;
+                }
+                if (artykul.Producent == null && !string.IsNullOrEmpty(artykul.NazwaProducenta))
+                {
+                    RaksKontakt rec = FindKontakt(artykul.IdProducenta, artykul.NazwaProducenta, artykul.NipProducenta);
+                    artykul.Producent = rec;
+                }
             }
             ObjectSpace.CommitChanges();
         }
 
+        private RaksKontakt FindKontakt(int id, string skrot,  string nip)
+        {
+        
+            var rec = ObjectSpace.FindObject<RaksKontakt>(new BinaryOperator(nameof(RaksKontakt.Id), id));
+            if (rec == null)
+            {
+                rec = ObjectSpace.CreateObject<RaksKontakt>();
+                rec.Id = id;
+                rec.NazwaPelna = skrot;
+                rec.NazwaSkrocona = skrot;
+                rec.Nip = nip;
+            
 
+            }
+
+            return rec;
+        }
         private void simpleAction3_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
 
@@ -105,6 +121,7 @@ namespace Receptury.Module.Controllers
             var reader = new ChilkatReader(ObjectSpace);
             reader.ImportRaksKontakty();
             reader.ImportRaksArtykuly();
+            reader.ImportRaksFaktury();
             ObjectSpace.CommitChanges();
             View.Refresh();
 
